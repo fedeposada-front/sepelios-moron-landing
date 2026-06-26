@@ -35,12 +35,11 @@ export default function Contact() {
                   </svg>
                 </span>
                 <div className="cline__body">
-                  <label>Línea principal</label>
-                  <b><a href={data.telefono_principal_tel}>{data.telefono_principal}</a></b>
-                  <div className="alt">
-                    Otras líneas:{' '}
-                    <a href={data.telefono_2_tel}>{data.telefono_2}</a>{' '}
-                    <a href={data.telefono_3_tel}>{data.telefono_3}</a>
+                  <label>Teléfonos</label>
+                  <b><a href={`tel:${data.telefono_principal_tel}`}>{data.telefono_principal}</a></b>
+                  <div className="phones-alt">
+                    <a href={`tel:${data.telefono_2_tel}`}>{data.telefono_2}</a>
+                    <a href={`tel:${data.telefono_3_tel}`}>{data.telefono_3}</a>
                   </div>
                 </div>
               </div>
@@ -52,8 +51,7 @@ export default function Contact() {
                 </span>
                 <div className="cline__body">
                   <label>WhatsApp</label>
-                  <b><a href={`https://wa.me/${data.whatsapp_numero}`} target="_blank" rel="noopener">{data.telefono_principal}</a></b>
-                  <div className="alt">Respuesta inmediata, las 24 horas</div>
+                  <div className="alt">{data.horario_atencion}</div>
                 </div>
               </div>
             </div>
@@ -63,17 +61,22 @@ export default function Contact() {
             <h3>Sepelios Morón</h3>
             <p>{data.direccion_calle} — {data.direccion_provincia}</p>
             <div className="map">
-              <div className="grid-bg"></div>
-              <span className="pin">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 0C7 0 3 4 3 9c0 6.5 9 15 9 15s9-8.5 9-15c0-5-4-9-9-9zm0 12.5A3.5 3.5 0 1 1 12 5.5a3.5 3.5 0 0 1 0 7z" />
-                </svg>
-              </span>
-              <div className="addr">
-                <span>{data.direccion_calle}</span>
-                <a href="https://www.google.com/maps/search/?api=1&query=M.+Sarratea+383+Mor%C3%B3n" target="_blank" rel="noopener">Ver mapa →</a>
-              </div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.1015805950483!2d-58.612705924778936!3d-34.65213747293689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc75254215991%3A0x1bace90429f3b6e8!2sSepelios%20moron!5e0!3m2!1ses-419!2sar!4v1782443380192!5m2!1ses-419!2sar"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                title="Ubicación de Sepelios Morón"
+              />
             </div>
+            <a
+              className="map-link"
+              href="https://maps.app.goo.gl/9Ups54cxzeaBYphK6"
+              target="_blank"
+              rel="noopener"
+            >
+              Abrir en Google Maps →
+            </a>
             <div className="hours">
               <span className="dot"></span>
               {data.horario_atencion}

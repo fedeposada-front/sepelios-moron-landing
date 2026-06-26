@@ -61,6 +61,7 @@ const FALLBACK = {
   zona_5: 'Ramos Mejía',
   zona_6: 'Merlo',
   zona_7: 'Zona Oeste',
+  zonas_cobertura: 'Morón|Castelar|Haedo|Ituzaingó|Ramos Mejía|Merlo|Zona Oeste',
 }
 
 export function useSiteData() {
@@ -83,6 +84,14 @@ export function useSiteData() {
         parsed.telefono_principal_tel = normalizeArgPhone(parsed.telefono_principal || FALLBACK.telefono_principal)
         parsed.telefono_2_tel = normalizeArgPhone(parsed.telefono_2 || FALLBACK.telefono_2)
         parsed.telefono_3_tel = normalizeArgPhone(parsed.telefono_3 || FALLBACK.telefono_3)
+        if (!parsed.zonas_cobertura) {
+          const merged = { ...FALLBACK, ...parsed }
+          const zonas = [
+            merged.zona_principal, merged.zona_2, merged.zona_3,
+            merged.zona_4, merged.zona_5, merged.zona_6, merged.zona_7,
+          ].filter(Boolean)
+          if (zonas.length) parsed.zonas_cobertura = zonas.join('|')
+        }
         setData({ ...FALLBACK, ...parsed })
       })
       .catch(() => setData(FALLBACK))

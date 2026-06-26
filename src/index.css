@@ -354,6 +354,13 @@ p { margin: 0; }
 .zone svg { width: 16px; height: 16px; color: var(--burgundy); }
 .zone.is-primary { background: var(--burgundy); color: #fff; border-color: var(--burgundy); }
 .zone.is-primary svg { color: var(--gold-soft); }
+.coverage-image {
+  border-radius: var(--radius-lg); overflow: hidden;
+  border: 1px solid var(--line); box-shadow: var(--shadow-md);
+  aspect-ratio: 4/3;
+}
+.coverage-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.coverage__note { margin-top: 20px; font-size: 13px; color: var(--text-muted); font-style: italic; }
 
 /* ============================================================
    Pricing
@@ -450,6 +457,9 @@ p { margin: 0; }
 .cline__body b { font-size: 18px; display: block; margin-top: 2px; }
 .cline__body .alt { font-size: 14px; color: rgba(255,255,255,.7); margin-top: 4px; display: flex; flex-wrap: wrap; gap: 6px 16px; }
 .cline__body .alt a:hover { color: #fff; text-decoration: underline; }
+.cline__body .phones-alt { display: flex; flex-direction: column; gap: 5px; margin-top: 7px; }
+.cline__body .phones-alt a { font-size: 15px; color: rgba(255,255,255,.78); }
+.cline__body .phones-alt a:hover { color: #fff; text-decoration: underline; }
 
 .contact-card {
   background: var(--white); color: var(--ink); border-radius: var(--radius-lg);
@@ -459,13 +469,11 @@ p { margin: 0; }
 .contact-card p { color: var(--muted); font-size: 15px; margin-top: 10px; }
 .contact-card .map {
   margin-top: 22px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line);
-  position: relative; aspect-ratio: 16/10; background: var(--bg-warm);
+  aspect-ratio: 16/10;
 }
-.contact-card .map .grid-bg { position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 30px 30px; opacity: .6; }
-.contact-card .map .pin { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -100%); color: var(--burgundy); }
-.contact-card .map .pin svg { width: 40px; height: 40px; filter: drop-shadow(0 4px 8px rgba(0,0,0,.2)); }
-.contact-card .map .addr { position: absolute; left: 14px; bottom: 14px; right: 14px; background: rgba(255,255,255,.94); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 13px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.contact-card .map .addr a { color: var(--burgundy); font-weight: 600; }
+.contact-card .map iframe { width: 100%; height: 100%; display: block; border: 0; }
+.map-link { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 600; color: var(--burgundy); }
+.map-link:hover { text-decoration: underline; }
 .contact-card .hours { margin-top: 22px; display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: rgba(37,211,102,.1); border: 1px solid rgba(31,174,85,.3); border-radius: 12px; font-size: 14px; font-weight: 500; }
 .contact-card .hours .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--wa); box-shadow: 0 0 0 0 rgba(37,211,102,.6); animation: pulse 2.4s infinite; }
 .contact-card .btn { margin-top: 22px; }

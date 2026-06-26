@@ -31,9 +31,9 @@ export default function Footer() {
             <h4>Contacto</h4>
             <ul>
               <li>{data.direccion_calle}</li>
-              <li><a href={data.telefono_principal_tel}>{data.telefono_principal}</a> · Línea principal</li>
-              <li><a href={data.telefono_2_tel}>{data.telefono_2}</a></li>
-              <li><a href={data.telefono_3_tel}>{data.telefono_3}</a></li>
+              <li><a href={`tel:${data.telefono_principal_tel}`}>{data.telefono_principal}</a> · Línea principal</li>
+              <li><a href={`tel:${data.telefono_2_tel}`}>{data.telefono_2}</a></li>
+              <li><a href={`tel:${data.telefono_3_tel}`}>{data.telefono_3}</a></li>
             </ul>
           </div>
         </div>
