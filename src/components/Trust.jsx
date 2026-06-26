@@ -47,7 +47,7 @@ export default function Trust() {
             </div>
           </div>
           <figure className="trust-figure reveal">
-            <img src="/assets/office-interior.png" alt="Oficina de atención de Sepelios Morón" />
+            <img src="/assets/24-hs.png" alt="Atención 24 horas Sepelios Morón" />
             <div className="badge">
               <b>24/7</b>
               <span>Disponibilidad real, todos los días del año, para asistir a su familia.</span>
