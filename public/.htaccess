@@ -1,0 +1,12 @@
+Options -MultiViews
+RewriteEngine On
+
+# 301: fuerza https://www.sepeliosmoron.com.ar en todas las variantes
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^ https://www.sepeliosmoron.com.ar%{REQUEST_URI} [R=301,L]
+
+# SPA fallback: sirve index.html para rutas que no son archivos ni directorios
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
