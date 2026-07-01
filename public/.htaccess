@@ -2,6 +2,9 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
+# PRUEBA TEMPORAL
+RewriteRule ^prueba-htaccess$ https://www.google.com [R=302,L]
+
 # Forzar dominio canónico: https://www.sepeliosmoron.com.ar/
 RewriteCond %{HTTP_HOST} !^www\.sepeliosmoron\.com\.ar$ [NC]
 RewriteRule ^(.*)$ https://www.sepeliosmoron.com.ar/$1 [R=301,L]
