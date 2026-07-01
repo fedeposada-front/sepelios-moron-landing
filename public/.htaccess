@@ -2,13 +2,12 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
-# 1) Dominio sin "www" (http o https) -> https + www
-RewriteCond %{HTTP_HOST} ^sepeliosmoron\.com\.ar$ [NC]
+# Forzar dominio canónico: https://www.sepeliosmoron.com.ar/
+RewriteCond %{HTTP_HOST} !^www\.sepeliosmoron\.com\.ar$ [NC]
 RewriteRule ^(.*)$ https://www.sepeliosmoron.com.ar/$1 [R=301,L]
 
-# 2) "www" pero sin https -> https + www
+# Forzar HTTPS cuando ya viene con www pero entra por http
 RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} ^www\.sepeliosmoron\.com\.ar$ [NC]
 RewriteRule ^(.*)$ https://www.sepeliosmoron.com.ar/$1 [R=301,L]
 
 # SPA fallback: sirve index.html para rutas que no son archivos ni directorios
