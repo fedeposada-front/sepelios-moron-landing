@@ -11,9 +11,6 @@ RewriteCond %{HTTPS} off
 RewriteCond %{HTTP_HOST} ^www\.sepeliosmoron\.com\.ar$ [NC]
 RewriteRule ^(.*)$ https://www.sepeliosmoron.com.ar/$1 [R=301,L]
 
-# PRUEBA TEMPORAL
-RewriteRule ^prueba-htaccess$ https://www.google.com [R=302,L]
-
 # SPA fallback: sirve index.html para rutas que no son archivos ni directorios
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
