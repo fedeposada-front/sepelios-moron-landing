@@ -5,6 +5,9 @@ import { buildWaHref } from '../hooks/useSiteData'
 export default function Hero() {
   const { data, cms } = useSiteDataContext()
   const content = cmsItem(cms,'seccion','hero')
+  const title = content?.titulo || 'Atención fúnebre las 24 horas en Morón'
+  const emphasis = content?.destacado || '24 horas'
+  const at = emphasis ? title.toLocaleLowerCase('es').indexOf(emphasis.toLocaleLowerCase('es')) : -1
 
   return (
     <section className="hero">
@@ -15,7 +18,7 @@ export default function Hero() {
         <span className="hero__eyebrow">
           <span className="dot"></span> Atención disponible ahora · 24 horas
         </span>
-        <h1>{content?.titulo ? (content.titulo.includes('24 horas') ? <>{content.titulo.split('24 horas')[0]}<em>24 horas</em>{content.titulo.split('24 horas').slice(1).join('24 horas')}</> : content.titulo) : <>Atención fúnebre las <em>24 horas</em> en Morón</>}</h1>
+        <h1>{at >= 0 ? <>{title.slice(0,at)}<em>{title.slice(at,at+emphasis.length)}</em>{title.slice(at+emphasis.length)}</> : title}</h1>
         <p className="hero__sub">
           {content?.descripcion || 'Cremaciones, salas velatorias, traslados y acompañamiento integral para las familias, con trato humano y respetuoso en cada paso.'}
         </p>
