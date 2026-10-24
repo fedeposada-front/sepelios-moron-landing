@@ -1,4 +1,4 @@
-import { CMSSection, CMSCards, CMSFAQ } from './components/CMSBlocks'
+import { CMSSection } from './components/CMSBlocks'
 import { useSiteDataContext } from './context/SiteDataContext'
 import { useScrollReveal } from './hooks/useScrollReveal'
 import Header from './components/Header'
@@ -21,14 +21,13 @@ function App() {
     <>
       <Header />
       <CMSSection cms={cms} id="hero"><Hero /></CMSSection>
-      <CMSSection cms={cms} id="servicios">{cms ? <CMSCards cms={cms} type="servicio" /> : <Services />}</CMSSection>
-      {cms && <CMSCards cms={cms} type="card" />}
+      <CMSSection cms={cms} id="servicios"><Services /></CMSSection>
       <CMSSection cms={cms} id="confianza"><Trust /></CMSSection>
       <CMSSection cms={cms} id="instalaciones"><Facilities /></CMSSection>
       <CMSSection cms={cms} id="proceso"><Process /></CMSSection>
       <CMSSection cms={cms} id="cobertura"><Coverage /></CMSSection>
       <CMSSection cms={cms} id="precios"><Pricing /></CMSSection>
-      <CMSSection cms={cms} id="preguntas">{cms ? <CMSFAQ cms={cms} /> : <FAQ />}</CMSSection>
+      <CMSSection cms={cms} id="preguntas"><FAQ /></CMSSection>
       <CMSSection cms={cms} id="contacto"><Contact /></CMSSection>
       <Footer />
       <WhatsAppButton />
