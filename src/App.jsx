@@ -1,3 +1,5 @@
+import { CMSSection, CMSCards, CMSFAQ } from './components/CMSBlocks'
+import { useSiteDataContext } from './context/SiteDataContext'
 import { useScrollReveal } from './hooks/useScrollReveal'
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -14,18 +16,21 @@ import WhatsAppButton from './components/WhatsAppButton'
 
 function App() {
   useScrollReveal()
+  const { cms } = useSiteDataContext()
   return (
     <>
       <Header />
-      <Hero />
-      <Services />
-      <Trust />
-      <Facilities />
-      <Process />
-      <Coverage />
-      <Pricing />
-      <FAQ />
-      <Contact />
+      <CMSSection cms={cms} id="hero"><Hero /></CMSSection>
+      <CMSSection cms={cms} id="servicios"><Services /></CMSSection>
+      {cms && <CMSCards cms={cms} type="servicio" />}
+      {cms && <CMSCards cms={cms} type="card" />}
+      <CMSSection cms={cms} id="confianza"><Trust /></CMSSection>
+      <CMSSection cms={cms} id="instalaciones"><Facilities /></CMSSection>
+      <CMSSection cms={cms} id="proceso"><Process /></CMSSection>
+      <CMSSection cms={cms} id="cobertura"><Coverage /></CMSSection>
+      <CMSSection cms={cms} id="precios"><Pricing /></CMSSection>
+      <CMSSection cms={cms} id="preguntas">{cms ? <CMSFAQ cms={cms} /> : <FAQ />}</CMSSection>
+      <CMSSection cms={cms} id="contacto"><Contact /></CMSSection>
       <Footer />
       <WhatsAppButton />
     </>
