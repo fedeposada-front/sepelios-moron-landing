@@ -1,3 +1,4 @@
+import { cmsItem } from '../cms/parseCMS'
 import { useSiteDataContext } from '../context/SiteDataContext'
 
 function parseZonas(raw) {
@@ -6,7 +7,7 @@ function parseZonas(raw) {
 }
 
 export default function Coverage() {
-  const { data } = useSiteDataContext()
+  const { data, cms } = useSiteDataContext()
   const zonas = parseZonas(data.zonas_cobertura)
 
   return (
@@ -16,7 +17,7 @@ export default function Coverage() {
           <div className="reveal">
             <div className="section-head" style={{ marginBottom: '8px' }}>
               <span className="eyebrow">Cobertura</span>
-              <h2>Atendemos en Morón y alrededores</h2>
+              <h2>{cmsItem(cms,'seccion','cobertura')?.titulo || 'Atendemos en Morón y alrededores'}</h2>
               <p>Llegamos con rapidez a toda la Zona Oeste del Gran Buenos Aires, con la misma atención cuidada en cada localidad.</p>
             </div>
             <div className="zones">
