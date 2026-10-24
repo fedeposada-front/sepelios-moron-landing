@@ -1,8 +1,9 @@
+import { cmsItem } from '../cms/parseCMS'
 import { useSiteDataContext } from '../context/SiteDataContext'
 import { buildWaHref } from '../hooks/useSiteData'
 
 export default function Contact() {
-  const { data } = useSiteDataContext()
+  const { data, cms } = useSiteDataContext()
 
   return (
     <section className="section contact" id="contacto">
@@ -10,7 +11,7 @@ export default function Contact() {
         <div className="contact-grid">
           <div className="reveal">
             <span className="eyebrow">Contacto</span>
-            <h2 style={{ marginTop: '16px' }}>Comunicate con nosotros</h2>
+            <h2 style={{ marginTop: '16px' }}>{cmsItem(cms,'seccion','contacto')?.titulo || 'Comunicate con nosotros'}</h2>
             <p className="contact__lead">
               Estamos para acompañarlo. Escríbanos o llámenos a cualquier hora y le brindaremos asistencia inmediata.
             </p>
