@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { cmsItems, cmsItem } from '../cms/parseCMS'
 import { useSiteDataContext } from '../context/SiteDataContext'
 import { buildWaHref } from '../hooks/useSiteData'
 
@@ -30,7 +31,9 @@ const items = [
 ]
 
 export default function FAQ() {
-  const { data } = useSiteDataContext()
+  const { data, cms } = useSiteDataContext()
+  const section = cmsItem(cms, 'seccion', 'preguntas')
+  const questions = cms ? cmsItems(cms, 'faq').map(x => ({q:x.pregunta,a:x.respuesta})) : items
   const [openIndex, setOpenIndex] = useState(null)
 
   const toggle = (i) => setOpenIndex(openIndex === i ? null : i)
@@ -42,10 +45,10 @@ export default function FAQ() {
           <div className="reveal">
             <span className="eyebrow">Preguntas frecuentes</span>
             <h2 style={{ fontSize: 'clamp(28px,3.4vw,40px)', marginTop: '16px' }}>
-              Respondemos sus dudas
+              {section?.titulo || 'Respondemos sus dudas'}
             </h2>
             <p style={{ color: 'var(--muted)', marginTop: '16px', fontSize: '16px' }}>
-              Si tiene cualquier otra consulta, escríbanos por WhatsApp y le respondemos de inmediato, a cualquier hora.
+              {section?.descripcion || 'Si tiene cualquier otra consulta, escríbanos por WhatsApp y le respondemos de inmediato, a cualquier hora.'}
             </p>
             <a
               className="btn btn--wa btn--lg"
@@ -58,7 +61,7 @@ export default function FAQ() {
             </a>
           </div>
           <div className="faq-list">
-            {items.map((item, i) => (
+            {questions.map((item, i) => (
               <div key={i} className={openIndex === i ? 'faq-item open' : 'faq-item'}>
                 <button className="faq-q" onClick={() => toggle(i)}>
                   {item.q}
