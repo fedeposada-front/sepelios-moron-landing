@@ -1,20 +1,21 @@
 import { cmsItem } from '../cms/parseCMS'
-import { useSiteDataContext } from '../context/SiteDataContext'
-import { buildWaHref } from '../hooks/useSiteData'
+import { buildTelHref, resolveButtonHref } from '../cms/links'
+import { useSiteDataContext } from '../context/useSiteDataContext'
+import { CMSButtons } from './CMSBlocks'
 
 export default function Contact() {
   const { data, cms } = useSiteDataContext()
+  const section = cmsItem(cms, 'seccion', 'contacto')
+  const contactHref = resolveButtonHref(section, data, 'whatsapp', section.button_message || data.wa_msg_contacto)
 
   return (
     <section className="section contact" id="contacto">
       <div className="wrap">
         <div className="contact-grid">
           <div className="reveal">
-            <span className="eyebrow">Contacto</span>
-            <h2 style={{ marginTop: '16px' }}>{cmsItem(cms,'seccion','contacto')?.titulo || 'Comunicate con nosotros'}</h2>
-            <p className="contact__lead">
-              Estamos para acompañarlo. Escríbanos o llámenos a cualquier hora y le brindaremos asistencia inmediata.
-            </p>
+            <span className="eyebrow">{section.eyebrow}</span>
+            <h2 style={{ marginTop: '16px' }}>{section.titulo}</h2>
+            <p className="contact__lead">{section.descripcion}</p>
             <div className="contact-lines">
               <div className="cline">
                 <span className="cline__ic">
@@ -24,10 +25,11 @@ export default function Contact() {
                   </svg>
                 </span>
                 <div className="cline__body">
-                  <label>Dirección</label>
+                  <span className="contact-label">{data.contact_address_label}</span>
                   <b>{data.direccion_calle}</b>
                   <div className="alt">{data.direccion_provincia}</div>
                 </div>
+                <CMSButtons group="contacto" />
               </div>
               <div className="cline">
                 <span className="cline__ic">
@@ -36,11 +38,11 @@ export default function Contact() {
                   </svg>
                 </span>
                 <div className="cline__body">
-                  <label>Teléfonos</label>
-                  <b><a href={`tel:${data.telefono_principal_tel}`}>{data.telefono_principal}</a></b>
+                  <span className="contact-label">{data.contact_phones_label}</span>
+                  <b><a href={buildTelHref(data.telefono_principal)}>{data.telefono_principal}</a></b>
                   <div className="phones-alt">
-                    <a href={`tel:${data.telefono_2_tel}`}>{data.telefono_2}</a>
-                    <a href={`tel:${data.telefono_3_tel}`}>{data.telefono_3}</a>
+                    <a href={buildTelHref(data.telefono_2)}>{data.telefono_2}</a>
+                    <a href={buildTelHref(data.telefono_3)}>{data.telefono_3}</a>
                   </div>
                 </div>
               </div>
@@ -51,7 +53,7 @@ export default function Contact() {
                   </svg>
                 </span>
                 <div className="cline__body">
-                  <label>WhatsApp</label>
+                  <span className="contact-label">{data.contact_whatsapp_label}</span>
                   <div className="alt">{data.horario_atencion}</div>
                 </div>
               </div>
@@ -59,40 +61,40 @@ export default function Contact() {
           </div>
 
           <div className="contact-card reveal">
-            <h3>Sepelios Morón</h3>
+            <h3>{data.brand_name}</h3>
             <p>{data.direccion_calle} — {data.direccion_provincia}</p>
             <div className="map">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.1015805950483!2d-58.612705924778936!3d-34.65213747293689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc75254215991%3A0x1bace90429f3b6e8!2sSepelios%20moron!5e0!3m2!1ses-419!2sar!4v1782443380192!5m2!1ses-419!2sar"
+                src={data.maps_embed_url}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="strict-origin-when-cross-origin"
-                title="Ubicación de Sepelios Morón"
+                title={data.map_iframe_title}
               />
             </div>
             <a
               className="map-link"
-              href="https://maps.app.goo.gl/9Ups54cxzeaBYphK6"
+              href={data.maps_url}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
             >
-              Abrir en Google Maps →
+              {data.map_link_label}
             </a>
             <div className="hours">
               <span className="dot"></span>
               {data.horario_atencion}
             </div>
-            <a
-              className="btn btn--wa btn--lg btn--block"
-              href={buildWaHref(data.whatsapp_numero, data.wa_msg_contacto)}
-              target="_blank"
-              rel="noopener"
+            {contactHref && <a
+              className={`btn ${contactHref.startsWith('https:') ? 'btn--wa' : 'btn--primary'} btn--lg btn--block`}
+              href={contactHref}
+              target={contactHref.startsWith('https:') ? '_blank' : undefined}
+              rel={contactHref.startsWith('https:') ? 'noopener noreferrer' : undefined}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.47 14.38c-.3-.15-1.74-.86-2-.96-.27-.1-.47-.15-.66.15-.2.3-.76.95-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.04-.17-.3-.02-.46.13-.6.13-.13.3-.34.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.57-.48-.5-.66-.5l-.56-.01c-.2 0-.5.07-.77.36s-1.02 1-1.02 2.42 1.05 2.8 1.2 3c.15.2 2.07 3.16 5.02 4.43.7.3 1.25.48 1.67.62.7.22 1.34.2 1.85.12.56-.08 1.74-.71 1.98-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35z" />
               </svg>
-              Contactar por WhatsApp
-            </a>
+              {section.button_text || data.contact_button_label}
+            </a>}
           </div>
         </div>
       </div>

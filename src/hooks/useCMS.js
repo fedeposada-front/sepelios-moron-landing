@@ -1,7 +1,32 @@
-import {useEffect,useState} from 'react';
-import {CMS_URL,parseCMS} from '../cms/parseCMS';
-export function useCMS(){
- const [cms,setCMS]=useState(null);
- useEffect(()=>{const controller=new AbortController();fetch(CMS_URL,{signal:controller.signal,cache:'no-store'}).then(r=>{if(!r.ok)throw Error('CMS '+r.status);return r.text()}).then(t=>setCMS(parseCMS(t))).catch(e=>{if(e.name!=='AbortError')console.warn('CMS: respaldo activo',e.message)});return()=>controller.abort()},[]);
- return cms;
+import { useEffect, useState } from 'react'
+import { createFallbackCMS, fetchCMS } from '../cms/parseCMS'
+
+export function useCMS() {
+  const [cms, setCMS] = useState(() => ({ ...createFallbackCMS(), status: 'loading' }))
+
+  useEffect(() => {
+    const controller = new AbortController()
+    const timeout = window.setTimeout(() => controller.abort(new Error('CMS request timed out')), 12000)
+
+    fetchCMS(globalThis.fetch, controller.signal).then(nextCMS => {
+      if (nextCMS.status === 'fallback' && nextCMS.error) {
+        console.error('CMS no disponible; se usa contenido local aprobado.', nextCMS.error)
+      } else if (nextCMS.issues.length) {
+        console.error('CMS contiene filas inválidas; se aplicaron valores seguros.', nextCMS.issues)
+      }
+      setCMS(nextCMS)
+    }).catch(error => {
+      if (error.name !== 'AbortError') {
+        console.error('Error inesperado al cargar el CMS.', error)
+        setCMS(createFallbackCMS(error))
+      }
+    })
+
+    return () => {
+      window.clearTimeout(timeout)
+      controller.abort()
+    }
+  }, [])
+
+  return cms
 }

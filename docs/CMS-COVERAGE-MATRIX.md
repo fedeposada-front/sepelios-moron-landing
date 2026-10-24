@@ -47,3 +47,29 @@
 En la pestaña tipada revisada se encontraron 9 secciones (`hero`, `servicios`, `confianza`, `instalaciones`, `proceso`, `cobertura`, `precios`, `preguntas`, `contacto`), 6 servicios, 6 FAQ, 7 zonas, 3 tarjetas de precio y 1 fila SEO. Los campos presentes se enumeran en la matriz; el hecho de existir en el CSV no significa que el JSX los utilice.
 
 `CMSBlocks.jsx` exporta `CMSCards`/`CMSFAQ`, pero no se invocan en `App.jsx`; las capacidades actuales de `card`, `aviso` y `boton` están desconectadas. No se editaron celdas ni se hicieron cambios en producción.
+
+## Actualización posterior — CMS-IMPLEMENTATION-01
+
+Esta sección complementa el snapshot histórico anterior. La implementación fue autorizada en una solicitud posterior y se validó localmente en la worktree aislada `react-vite-tailwind-cms-audit`, sobre la rama `feature/web-cms-unificado`.
+
+| Superficie visible | Estado actualizado | Cobertura implementada |
+|---|---|---|
+| Header, marca y navegación desktop/móvil | CMS conectado | Marca/llamadas usan `config`; navegación se deriva de secciones visibles y respeta `nav_visible`. |
+| Hero | CMS conectado | Copy, énfasis libre `destacado`, imagen/alt, CTA/acción, señales y avisos CMS. |
+| Servicios | CMS conectado | Secciones, tarjetas visibles/ordenadas, iconos, enlaces y acciones. |
+| Confianza | CMS conectado | Título, cards ordenables, imagen, alt y distintivo. |
+| Instalaciones | CMS conectado | Cards ordenables con imagen/alt, copy y nota. |
+| Proceso | CMS conectado | Heading y pasos ordenables. |
+| Cobertura | CMS conectado | Heading, localidades ordenables/visibles, nota, mapa/alt y enlaces. |
+| Precios | CMS conectado | Heading, tarjetas visibles/ordenadas, importe, subtexto, beneficios, CTA y selección de tarjeta destacada. |
+| FAQ | CMS conectado | Heading, preguntas/respuestas, expansión accesible y CTAs. |
+| Contacto | CMS conectado | Dirección, teléfonos, enlaces normalizados, horarios, mapa y CTA. |
+| Footer | Parcial | Copy, contactos y enlaces usan CMS; el texto fijo `Línea principal` y el año del sistema no son campos editables. |
+| WhatsApp flotante/barra móvil | CMS conectado | Número y etiqueta/mensaje de WhatsApp y teléfono derivados de la configuración validada. |
+| Metadatos SEO | Parcial | Se actualizan en cliente desde CMS; el HTML estático inicial no se prerenderiza con los datos de la hoja. |
+
+**Métrica de superficie visible:** 11 de 12 superficies de interfaz están conectadas íntegramente a datos CMS/fallback (91,7%, redondeado a **92%**); el footer es parcial por el texto fijo indicado. Se excluyen iconos decorativos, estructura/estilos, mensajes de accesibilidad de controles y datos generados (año). SEO se registra aparte porque no es una superficie visual.
+
+**Disponibilidad actual de filas publicadas:** se compararon 226 campos de fallback administrables contra el CSV de solo lectura: 88 están representados y 138 faltan (**38,9%** de filas/valores base presentes). Las 138 filas exactas, con valores extraídos de los defaults aprobados, están enumeradas en `CMS-SHEETS-MIGRATION.md`; la hoja no se modificó.
+
+**Pendientes para el siguiente gate:** aprobación de la validez/vigencia del precio numérico publicado (el modelo no incluye expiración), prueba visual/interactiva desktop y móvil, lector de pantalla y verificación de SEO en HTML servido. `npm audit` mantiene tres advisories moderados de dependencias de desarrollo relacionados con Tailwind 3; runtime no reportó vulnerabilidades. No se desplegó.

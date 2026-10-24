@@ -1,8 +1,8 @@
 # CMS-IMPLEMENTATION-PLAN — propuesta de arquitectura y gates
 
-**Estado:** recomendación posterior a QA-CMS-01; no implementado.
+**Estado:** propuesta histórica posterior a QA-CMS-01. CMS-IMPLEMENTATION-01 fue autorizado posteriormente y ejecutado localmente; resultados actuales en `CMS-IMPLEMENTATION-QA.md`.
 **Base auditada:** `feature/web-cms-unificado` / `300cedd4f80cf45caa1f238add12c97afd17584c`.
-**Restricción:** este plan no autoriza cambios de código, Google Sheets, Vercel ni producción.
+**Restricción del gate actual:** esta implementación no modificó Google Sheets, Vercel ni producción. Las etapas y decisiones pendientes de este plan siguen siendo gates antes de staging/publicación.
 
 ## Arquitectura recomendada
 

@@ -1,6 +1,7 @@
 import { CMSSection } from './components/CMSBlocks'
-import { useSiteDataContext } from './context/SiteDataContext'
+import { useSiteDataContext } from './context/useSiteDataContext'
 import { useScrollReveal } from './hooks/useScrollReveal'
+import { useSEOMetadata } from './hooks/useSEOMetadata'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import Services from './components/Services'
@@ -16,7 +17,8 @@ import WhatsAppButton from './components/WhatsAppButton'
 
 function App() {
   useScrollReveal()
-  const { cms } = useSiteDataContext()
+  const { cms, data } = useSiteDataContext()
+  useSEOMetadata(cms, data)
   return (
     <>
       <Header />
