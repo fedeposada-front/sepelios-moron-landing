@@ -17,10 +17,11 @@ export function parseCMS(text) {
   const [type,id,field,value='',show='SI',order='0']=cells.map(v=>String(v??'').trim());
   if(!/^[a-z0-9_]+$/.test(id)||!/^[a-z0-9_]+$/.test(field))continue;
   if(type==='config'){if(field==='whatsapp_numero'&&!/^\d{11,15}$/.test(value))continue;config[field]=value;continue}
-  if(!['seccion','servicio','card','faq','zona','aviso','boton','seo'].includes(type))continue;
+  if(!['seccion','servicio','precio','card','faq','zona','aviso','boton','seo'].includes(type))continue;
   if(field==='imagen'&&value&&!(/^https:\/\/[^\s"'<>]+$/.test(value)||/^\/assets\/[\w./-]+$/.test(value)))continue;
   const key=type+':'+id;groups[key]??={type,id,mostrar:true,orden:Number(order)||0};
-  groups[key].mostrar=groups[key].mostrar&&show.toUpperCase()!=='NO';groups[key][field]=value;
+  if(field==='mostrar') groups[key].mostrar=value.toUpperCase()!=='NO';
+  else if(show.toUpperCase()!=='NO') groups[key][field]=value;
  }
  const collections={};for(const item of Object.values(groups))(collections[item.type]??=[]).push(item);
  for(const items of Object.values(collections))items.sort((a,b)=>a.orden-b.orden||a.id.localeCompare(b.id));
