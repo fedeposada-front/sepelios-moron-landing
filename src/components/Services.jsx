@@ -4,7 +4,7 @@ import { cmsItems, cmsItem } from '../cms/parseCMS'
 export default function Services() {
   const { cms } = useSiteDataContext()
   const section = cmsItem(cms, 'seccion', 'servicios')
-  const items = cmsItems(cms, 'servicio')
+  const items = cmsItems(cms, 'servicio').filter(item => item.visible_en_servicios !== 'NO')
   return (
     <section className="section" id="servicios">
       <div className="wrap">
