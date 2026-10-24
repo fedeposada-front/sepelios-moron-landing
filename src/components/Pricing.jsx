@@ -1,3 +1,4 @@
+import { cmsItem } from '../cms/parseCMS'
 import { useSiteDataContext } from '../context/SiteDataContext'
 import { buildWaHref, fillPrecio } from '../hooks/useSiteData'
 
@@ -19,7 +20,12 @@ function isRealPrice(value) {
 }
 
 export default function Pricing() {
-  const { data } = useSiteDataContext()
+  const { data, cms } = useSiteDataContext()
+  const section = cmsItem(cms, 'seccion', 'precios')
+  const cremacion = cmsItem(cms, 'precio', 'cremacion')
+  const velatorio = cmsItem(cms, 'precio', 'velatorio')
+  const traslado = cmsItem(cms, 'precio', 'traslado')
+  const featured = [cremacion,velatorio,traslado].find(x => x?.destacada === 'SI')?.id || 'velatorio'
 
   const cremacionTienePrecio = isRealPrice(data.precio_cremacion)
   const velatorioTienePrecio = isRealPrice(data.precio_velatorio)
@@ -42,12 +48,12 @@ export default function Pricing() {
       <div className="wrap">
         <div className="section-head center reveal">
           <span className="eyebrow">Precios</span>
-          <h2>Servicios con precios claros</h2>
+          <h2>{section?.titulo || 'Servicios con precios claros'}</h2>
           <p>Le brindamos un presupuesto transparente y actualizado según el servicio que su familia necesite, sin sorpresas.</p>
         </div>
         <div className="pricing-grid">
 
-          <article className="price-card reveal">
+          {cremacion?.mostrar !== false && <article className={`price-card${featured === "cremacion" ? " is-featured" : ""} reveal`}>
             <div className="price-card__name">Cremación</div>
             <p className="price-card__desc">Servicio de cremación con opciones de urna y memorial.</p>
             <div className={`price-card__value${isRealPrice(data.precio_cremacion) ? ' price-card__value--precio' : ''}`}>
@@ -75,9 +81,9 @@ export default function Pricing() {
             >
               {cremacionTienePrecio ? 'Contratar servicio' : 'Solicitar presupuesto'}
             </a>
-          </article>
+          </article>}
 
-          <article className="price-card is-featured reveal">
+          {velatorio?.mostrar !== false && <article className={`price-card${featured === "velatorio" ? " is-featured" : ""} reveal`}>
             <div className="price-card__name">Servicio velatorio</div>
             <p className="price-card__desc">Sala velatoria con acompañamiento integral a la familia.</p>
             <div className={`price-card__value${isRealPrice(data.precio_velatorio) ? ' price-card__value--precio' : ''}`}>
@@ -105,9 +111,9 @@ export default function Pricing() {
             >
               {velatorioTienePrecio ? 'Contratar servicio' : 'Solicitar presupuesto'}
             </a>
-          </article>
+          </article>}
 
-          <article className="price-card reveal">
+          {traslado?.mostrar !== false && <article className={`price-card${featured === "traslado" ? " is-featured" : ""} reveal`}>
             <div className="price-card__name">Traslados</div>
             <p className="price-card__desc">Traslados nacionales e internacionales con gestión completa.</p>
             <div className={`price-card__value${isRealPrice(data.precio_traslado) ? ' price-card__value--precio' : ''}`}>
@@ -135,7 +141,7 @@ export default function Pricing() {
             >
               {trasladoTienePrecio ? 'Contratar servicio' : 'Solicitar presupuesto'}
             </a>
-          </article>
+          </article>}
 
         </div>
         <p className="pricing-note">{data.precio_nota}</p>
