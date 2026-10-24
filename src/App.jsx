@@ -21,8 +21,7 @@ function App() {
     <>
       <Header />
       <CMSSection cms={cms} id="hero"><Hero /></CMSSection>
-      <CMSSection cms={cms} id="servicios"><Services /></CMSSection>
-      {cms && <CMSCards cms={cms} type="servicio" />}
+      <CMSSection cms={cms} id="servicios">{cms ? <CMSCards cms={cms} type="servicio" /> : <Services />}</CMSSection>
       {cms && <CMSCards cms={cms} type="card" />}
       <CMSSection cms={cms} id="confianza"><Trust /></CMSSection>
       <CMSSection cms={cms} id="instalaciones"><Facilities /></CMSSection>
