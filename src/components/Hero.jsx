@@ -15,7 +15,7 @@ export default function Hero() {
         <span className="hero__eyebrow">
           <span className="dot"></span> Atención disponible ahora · 24 horas
         </span>
-        <h1>{content?.titulo || <>Atención fúnebre las <em>24 horas</em> en Morón</>}</h1>
+        <h1>{content?.titulo ? (content.titulo.includes('24 horas') ? <>{content.titulo.split('24 horas')[0]}<em>24 horas</em>{content.titulo.split('24 horas').slice(1).join('24 horas')}</> : content.titulo) : <>Atención fúnebre las <em>24 horas</em> en Morón</>}</h1>
         <p className="hero__sub">
           {content?.descripcion || 'Cremaciones, salas velatorias, traslados y acompañamiento integral para las familias, con trato humano y respetuoso en cada paso.'}
         </p>
