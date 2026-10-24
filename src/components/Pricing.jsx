@@ -74,7 +74,7 @@ export default function Pricing() {
               <li><CheckIcon /> Gestión de trámites</li>
             </ul>
             <a
-              className="btn btn--primary btn--block"
+              className={`btn ${featured === "cremacion" ? "btn--wa" : "btn--primary"} btn--block`}
               href={waHref.cremacion}
               target="_blank"
               rel="noopener"
@@ -104,7 +104,7 @@ export default function Pricing() {
               <li><CheckIcon /> Coordinación de ceremonia</li>
             </ul>
             <a
-              className="btn btn--wa btn--block"
+              className={`btn ${featured === "velatorio" ? "btn--wa" : "btn--primary"} btn--block`}
               href={waHref.velatorio}
               target="_blank"
               rel="noopener"
@@ -134,7 +134,7 @@ export default function Pricing() {
               <li><CheckIcon /> Ambulancia propia</li>
             </ul>
             <a
-              className="btn btn--primary btn--block"
+              className={`btn ${featured === "traslado" ? "btn--wa" : "btn--primary"} btn--block`}
               href={waHref.traslado}
               target="_blank"
               rel="noopener"
