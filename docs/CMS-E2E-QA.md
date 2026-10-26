@@ -50,7 +50,9 @@ Las imágenes muestran el hero, el texto de prueba, el énfasis configurable, la
 
 El proyecto comercial no debe recibir alias, cambios de configuración ni producción. La regla documentada de Vercel hace que el primer deployment de un proyecto nuevo siempre sea `production`, incluso si se omite `--prod`. Por eso se retiraron los deployments iniciales de dos proyectos QA creados durante la preparación y se borraron esos proyectos; no se cambió el proyecto `sepelios-moron-landing` durante esos intentos. No se alteraron permisos de GitHub ni protecciones Vercel.
 
-**Estado del preview final:** se informará aquí solo después de verificar que el deployment queda en target `preview`, tiene una URL única y carga este fixture. Un preview de la rama QA no debe apuntar a una URL alias de producción ni al CSV real.
+Para completar el pedido sin crear otro proyecto ni reasignar la preview comercial, se usará el proyecto existente `sepelios-moron-landing`, con `--environment preview` explícito y el fixture pasado como `VITE_CMS_CSV_URL=/cms-e2e.csv`. El deployment tendrá una URL única; no se promoverá, ni se tocarán los aliases de producción u otras ramas. `.vercelignore` excluye documentación, tests y artefactos locales, manteniendo `public/cms-e2e.csv` dentro del build.
+
+**Estado del preview final:** pendiente de publicar y comprobar target/URL. Un preview de la rama QA no debe apuntar a una URL alias de producción ni al CSV real.
 
 La protección `vercel_authentication` del proyecto puede impedir acceso público en navegador; no se desactivará ni se cambiarán permisos para sortearla. La evidencia E2E ejecutada corresponde al preview local aislado y Playwright, no a un navegador autenticado contra Vercel.
 
