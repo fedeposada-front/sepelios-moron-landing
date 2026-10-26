@@ -75,9 +75,9 @@ El PASS funcional no implica aprobación de identidad pixel a pixel. La resoluci
 
 Regla permanente: cada etapa debe tener código, documentación, pruebas y evidencias versionadas en GitHub. La documentación local sola no constituye una entrega cerrada. El cierre online exige push de la rama autorizada, acceso a los archivos y coincidencia exacta de HEAD remoto y local.
 
-Resultado del checkpoint online: BLOCKED. La revisión automática de permisos rechazó el comando antes de ejecutarlo: exige autorización explícita del destino y del contenido a enviar. Destino detectado en origin: https://github.com/fedeposada-front/sepelios-moron-landing.git . Contenido preparado: historial de integration/cms-controlled-stage-1, código CMS QA, documentación, pruebas, fixture y seis capturas seleccionadas; quedan excluidos reportes temporales y trazas. La consulta previa de refs remotas no encontró esta rama; main remoto permanecía en 1b8349c1fb2b982deb2c25294a20aeb8a8b081fa.
+Resultado del intento anterior (resuelto en la sección final): BLOCKED. La revisión automática de permisos rechazó el comando antes de ejecutarlo: exige autorización explícita del destino y del contenido a enviar. Destino detectado en origin: https://github.com/fedeposada-front/sepelios-moron-landing.git . Contenido preparado: historial de integration/cms-controlled-stage-1, código CMS QA, documentación, pruebas, fixture y seis capturas seleccionadas; quedan excluidos reportes temporales y trazas. La consulta previa de refs remotas no encontró esta rama; main remoto permanecía en 1b8349c1fb2b982deb2c25294a20aeb8a8b081fa.
 
-No se publicó la rama, no se acreditó acceso online a los archivos ni coincidencia de HEAD remoto. La documentación queda preparada en el commit que incorpora esta sección. No hubo modificaciones en main, Google Sheets, Vercel ni Ferozo, merge, despliegue o ejecución de ETAPA 2.
+En ese intento anterior no se publicó la rama ni se acreditó acceso online a los archivos o coincidencia de HEAD remoto. La documentación queda preparada en el commit que incorpora esta sección. No hubo modificaciones en main, Google Sheets, Vercel ni Ferozo, merge, despliegue o ejecución de ETAPA 2.
 
 ## Checkpoint online desbloqueado — PASS
 
