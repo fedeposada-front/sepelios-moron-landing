@@ -16,6 +16,8 @@
 **Lint: PASS.**
 **Build local: PASS.**
 
+**Auditoría de dependencias:** `npm audit` informó 3 vulnerabilidades moderate en dependencias de desarrollo de Tailwind; `npm audit --omit=dev` informó 0. No se ejecutó `npm audit fix`.
+
 El servidor de pruebas recibe `VITE_CMS_CSV_URL=/cms-e2e.csv`, por lo que el navegador lee el fixture estático y no accede a Google Sheets. El valor por defecto del CMS sigue apuntando a la única URL oficial (`gid=266301715`); el CSV publicado real no fue editado.
 
 ## Campos y comportamientos verificados
@@ -52,9 +54,9 @@ El proyecto comercial no debe recibir alias, cambios de configuración ni produc
 
 Para completar el pedido sin crear otro proyecto ni reasignar la preview comercial, se usará el proyecto existente `sepelios-moron-landing`, con `--environment preview` explícito y el fixture pasado como `VITE_CMS_CSV_URL=/cms-e2e.csv`. El deployment tendrá una URL única; no se promoverá, ni se tocarán los aliases de producción u otras ramas. `.vercelignore` excluye documentación, tests y artefactos locales, manteniendo `public/cms-e2e.csv` dentro del build.
 
-**Estado del preview final:** pendiente de publicar y comprobar target/URL. Un preview de la rama QA no debe apuntar a una URL alias de producción ni al CSV real.
+**Preview publicado:** [URL única](https://sepelios-moron-landing-d96d1jda8-fedeposadas-projects.vercel.app), deployment `dpl_HQgJ3QArc5vFxk5mW6omwdcpXiuD`, snapshot del commit `e6e6e0fe4a86a5f083455d2f246479aaea9bbfe6`. Vercel informa `target=preview`, `readyState=READY`; `vercel deploy --verify` obtuvo HTTP 200. No se ejecutó promoción ni se reasignaron aliases.
 
-La protección `vercel_authentication` del proyecto puede impedir acceso público en navegador; no se desactivará ni se cambiarán permisos para sortearla. La evidencia E2E ejecutada corresponde al preview local aislado y Playwright, no a un navegador autenticado contra Vercel.
+La protección `vercel_authentication` sigue activa. Por eso Playwright verificó localmente el build/fixture y no navegó el preview protegido; las capturas desktop/tablet/móvil son del servidor local con el mismo fixture. No se desactivó la protección ni se cambiaron permisos para sortearla. El preview existe y está listo, pero una persona sin acceso autorizado a Vercel puede ver la pantalla de autenticación en lugar del sitio.
 
 ## Ejecución reproducible
 
