@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-export function useScrollReveal() {
+export function useScrollReveal(content) {
   useEffect(() => {
     const reveals = document.querySelectorAll('.reveal')
     if (!('IntersectionObserver' in window)) {
@@ -18,5 +18,5 @@ export function useScrollReveal() {
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' })
     reveals.forEach(el => io.observe(el))
     return () => io.disconnect()
-  }, [])
+  }, [content])
 }
