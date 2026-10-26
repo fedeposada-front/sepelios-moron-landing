@@ -231,7 +231,8 @@ p { margin: 0; }
 /* ============================================================
    Services
    ============================================================ */
-.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.services-grid, .pricing-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; }
+.services-grid > .card, .pricing-grid > .price-card { flex: 0 1 calc((100% - 44px) / 3); }
 .card {
   background: var(--white);
   border: 1px solid var(--line);
@@ -374,7 +375,6 @@ p { margin: 0; }
 /* ============================================================
    Pricing
    ============================================================ */
-.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .price-card {
   background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg);
   padding: 34px 30px; display: flex; flex-direction: column;
@@ -540,7 +540,7 @@ p { margin: 0; }
   .header__cta .btn--ghost { display: none; }
   .burger { display: inline-flex; }
   .trust-grid, .coverage-grid, .contact-grid, .faq-wrap { grid-template-columns: 1fr; gap: 40px; }
-  .services-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  .services-grid > .card, .pricing-grid > .price-card { flex-basis: calc((100% - 22px) / 2); }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .step__line { display: none; }
   .facilities-grid { grid-template-columns: 1fr; }
@@ -553,7 +553,8 @@ p { margin: 0; }
   .section { padding-block: 64px; }
   .section--tight { padding-block: 52px; }
   .wrap { padding-inline: 18px; }
-  .services-grid, .pricing-grid, .steps { grid-template-columns: 1fr; }
+  .services-grid > .card, .pricing-grid > .price-card { flex-basis: 100%; }
+  .steps { grid-template-columns: 1fr; }
   .hero__inner { padding-block: 92px 96px; }
   .hero__actions .btn { flex: 1; }
   .footer__top { grid-template-columns: 1fr; }
