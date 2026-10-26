@@ -54,4 +54,10 @@ El primer intento focalizado agotó el timeout predeterminado de 30 segundos al 
 
 ## Preview
 
-URL y SHA de deployment se agregarán tras publicar y verificar el target `preview`. No promover a producción ni usar aliases comerciales.
+**URL:** [preview aislado](https://sepelios-moron-landing-iaqw22wsw-fedeposadas-projects.vercel.app)
+
+**Deployment:** `dpl_JAdVdMp1yh6XHUENRc1Z3EnvTfav`; `target=preview`, `readyState=READY`; verificación CLI HTTP 200.
+
+**Commit de código desplegado:** `0ffa1a771cf7f2da73737eb4affa8764a767ff07`. Se pasó `VITE_CMS_CSV_URL=/cms-e2e.csv` en build; el preview usa el fixture ficticio y no necesita Sheets.
+
+La protección `vercel_authentication` permanece activa. No se promovió el deployment ni se reasignaron aliases comerciales/producción; la inspección visual E2E se ejecutó en local, no contra una sesión autenticada en Vercel.
