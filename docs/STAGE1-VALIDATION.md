@@ -60,3 +60,21 @@ ETAPA 2 queda pendiente de autorización. No se hizo merge, push, publicación n
 Última ejecución, árbol final: lint exit 0; unitarias 9/9; build exit 0 (38 módulos); E2E 6/6 en 1.9 minutos, incluyendo la matriz de 18 escenarios y capturas QA de cinco servicios/dos precios en tres viewports. git diff --check sin errores. Los mensajes CMS HTTP 503 y CSV malformado son errores provocados deliberadamente por el caso de fallback, que pasó.
 
 Inspección visual final: tarjetas visibles, SVG presentes, fila de dos servicios centrada y dos precios centrados en desktop; móvil sin desbordamiento horizontal. Las capturas de sección incluyen elementos fijos (Header/WhatsApp), que pueden superponerse por la posición de scroll de la captura. Selección conservada: docs/stage1-evidence/qa-{servicios,precios}-{desktop,tablet,mobile}.png.
+
+## Checkpoint online — ETAPA 1
+
+Commit de código revalidado: f2ad572030d87af4fbd1716fa32b6565a1d28687. Antes del checkpoint HEAD coincidía con ese commit y el árbol estaba limpio. Este checkpoint agrega únicamente documentación; conserva código, pruebas y seis evidencias del PASS anterior. No se repitieron pruebas de aplicación porque no cambió código ni configuración.
+
+Pendientes visuales explícitos frente a main, sin corregir ni aprobar en este checkpoint:
+
+- Navegación: las etiquetas provienen de nav_label del CMS; desktop muestra Preguntas frecuentes en lugar de Preguntas. Revisar longitud, distribución y equivalencia con el diseño original en desktop y móvil.
+- WhatsApp: el flotante usa header_whatsapp_label y muestra Contactar por WhatsApp en lugar de WhatsApp. Revisar ancho y consistencia con la barra móvil.
+- Footer: lista los servicios visibles y agrega enlaces de secciones del CMS. Revisar cantidad, orden y altura frente al Footer original.
+
+El PASS funcional no implica aprobación de identidad pixel a pixel. La resolución de estos pendientes requiere alcance autorizado posterior; no se ejecutó ETAPA 2.
+
+Regla permanente: cada etapa debe tener código, documentación, pruebas y evidencias versionadas en GitHub. La documentación local sola no constituye una entrega cerrada. El cierre online exige push de la rama autorizada, acceso a los archivos y coincidencia exacta de HEAD remoto y local.
+
+Resultado del checkpoint online: BLOCKED. La revisión automática de permisos rechazó el comando antes de ejecutarlo: exige autorización explícita del destino y del contenido a enviar. Destino detectado en origin: https://github.com/fedeposada-front/sepelios-moron-landing.git . Contenido preparado: historial de integration/cms-controlled-stage-1, código CMS QA, documentación, pruebas, fixture y seis capturas seleccionadas; quedan excluidos reportes temporales y trazas. La consulta previa de refs remotas no encontró esta rama; main remoto permanecía en 1b8349c1fb2b982deb2c25294a20aeb8a8b081fa.
+
+No se publicó la rama, no se acreditó acceso online a los archivos ni coincidencia de HEAD remoto. La documentación queda preparada en el commit que incorpora esta sección. No hubo modificaciones en main, Google Sheets, Vercel ni Ferozo, merge, despliegue o ejecución de ETAPA 2.
