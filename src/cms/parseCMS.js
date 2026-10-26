@@ -316,9 +316,9 @@ export function createFallbackCMS(error = null) {
   return fallback
 }
 
-export async function fetchCMS(fetcher = globalThis.fetch, signal) {
+export async function fetchCMS(fetcher = globalThis.fetch, signal, url = CMS_URL) {
   try {
-    const response = await fetcher(CMS_URL, { signal, cache: 'no-store' })
+    const response = await fetcher(url, { signal, cache: 'no-store' })
     if (!response.ok) throw new Error(`CMS HTTP ${response.status}`)
     const cms = parseCMS(await response.text())
     cms.status = 'ready'

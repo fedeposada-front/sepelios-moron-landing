@@ -1,0 +1,117 @@
+tipo,id,campo,valor,mostrar,orden,ayuda
+config,site,brand_name,Sepelios Morón QA,SI,0,Fixture aislado
+config,site,brand_tagline,QA AISLADO,SI,0,Fixture aislado
+config,site,whatsapp_numero,5491123456789,SI,0,Fixture
+config,site,telefono_principal,11-2345-6789,SI,0,Fixture
+config,site,telefono_2,11-3456-7890,SI,0,Fixture
+config,site,telefono_3,11-4567-8901,SI,0,Fixture
+config,site,direccion_calle,Dirección de prueba 123,SI,0,Fixture aislado
+config,site,contact_address_label,Dirección de prueba,SI,0,Fixture
+config,site,map_iframe_title,Mapa QA aislado,SI,0,Fixture
+config,site,header_phone_label,Llamada de prueba,SI,0,Fixture
+config,site,header_whatsapp_label,WhatsApp de prueba,SI,0,Fixture
+config,site,coverage_note,Nota de cobertura QA,SI,0,Fixture
+config,site,coverage_map_url,/assets/coverage-areas.png,SI,0,Fixture
+config,site,coverage_map_alt,Mapa QA alt,SI,0,Fixture
+config,site,trust_image,/assets/24-hs.png,SI,0,Fixture
+config,site,trust_image_alt,Imagen QA alt,SI,0,Fixture
+config,site,seo_title,SEO QA aislado,SI,0,Fixture
+config,site,seo_description,Descripción SEO QA,SI,0,Fixture
+seccion,hero,titulo,Atención con DESTACADO QA en Morón,SI,0,Fixture
+seccion,hero,destacado,DESTACADO QA,SI,0,Fixture
+seccion,hero,descripcion,Descripción editable de hero QA,SI,0,Fixture
+seccion,hero,imagen,/assets/office-interior.png,SI,0,Fixture
+seccion,hero,imagen_alt,Imagen principal de prueba,SI,0,Fixture
+seccion,hero,button_text,CTA de prueba QA,SI,0,Fixture
+seccion,hero,button_action,whatsapp,SI,0,Fixture
+seccion,hero,button_message,Mensaje desde CSV de prueba,SI,0,Fixture
+seccion,hero,nav_visible,NO,SI,0,Fixture
+seccion,servicios,titulo,Servicios QA actualizados,SI,1,Fixture
+seccion,servicios,descripcion,Descripción servicios QA,SI,1,Fixture
+seccion,confianza,titulo,Confianza QA actualizada,SI,2,Fixture
+seccion,instalaciones,titulo,Instalaciones QA actualizadas,SI,3,Fixture
+seccion,proceso,titulo,Proceso QA actualizado,SI,4,Fixture
+seccion,proceso,nav_visible,NO,SI,4,Fixture
+seccion,cobertura,titulo,Cobertura QA actualizada,SI,5,Fixture
+seccion,precios,titulo,Precios QA actualizados,SI,6,Fixture
+seccion,preguntas,titulo,Preguntas QA actualizadas,SI,7,Fixture
+seccion,preguntas,descripcion,Descripción FAQ QA,SI,7,Fixture
+seccion,preguntas,button_text,Consulta FAQ QA,SI,7,Fixture
+seccion,preguntas,button_message,Mensaje FAQ QA,SI,7,Fixture
+seccion,contacto,titulo,Contacto QA actualizado,SI,8,Fixture
+seccion,contacto,descripcion,Descripción contacto QA,SI,8,Fixture
+seccion,contacto,button_text,Contactar QA,SI,8,Fixture
+seccion,contacto,button_message,Mensaje contacto QA,SI,8,Fixture
+servicio,velatorio,titulo,Servicio ordenado primero QA,SI,0,Fixture
+servicio,velatorio,descripcion,Detalle velatorio QA,SI,0,Fixture
+servicio,velatorio,icono,house,SI,0,Fixture
+servicio,cremacion,titulo,Servicio ordenado segundo QA,SI,1,Fixture
+servicio,cremacion,descripcion,Detalle cremación QA,SI,1,Fixture
+servicio,cremacion,icono,flame,SI,1,Fixture
+servicio,oculto,titulo,Servicio oculto QA,NO,2,Fixture
+servicio,oculto,descripcion,No debe mostrarse,NO,2,Fixture
+servicio,traslado,titulo,,NO,3,Fixture
+servicio,flores,titulo,,NO,3,Fixture
+servicio,cementerios,titulo,,NO,4,Fixture
+servicio,personalizada,titulo,,NO,5,Fixture
+card,confianza_qa_primera,grupo,confianza,SI,1,Fixture
+card,confianza_qa_primera,numero,02,SI,1,Fixture
+card,confianza_qa_primera,titulo,Segunda tarjeta confianza QA,SI,1,Fixture
+card,confianza_qa_primera,descripcion,Descripción segunda tarjeta confianza QA,SI,1,Fixture
+card,confianza_qa_segunda,grupo,confianza,SI,0,Fixture
+card,confianza_qa_segunda,numero,01,SI,0,Fixture
+card,confianza_qa_segunda,titulo,Primera tarjeta confianza QA,SI,0,Fixture
+card,confianza_qa_segunda,descripcion,Descripción primera tarjeta confianza QA,SI,0,Fixture
+card,confianza_24hs,titulo,,NO,0,Fixture
+card,confianza_humana,titulo,,NO,1,Fixture
+card,confianza_tramites,titulo,,NO,2,Fixture
+card,confianza_ambulancia,titulo,,NO,3,Fixture
+card,confianza_acompanamiento,titulo,,NO,4,Fixture
+card,instalacion_qa,grupo,instalacion,SI,0,Fixture
+card,instalacion_qa,titulo,Foto QA cambiada,SI,0,Fixture
+card,instalacion_qa,descripcion,Descripción foto QA,SI,0,Fixture
+card,instalacion_qa,imagen,/assets/office-interior.png,SI,0,Fixture
+card,instalacion_qa,imagen_alt,Alt foto QA,SI,0,Fixture
+card,instalacion_oficina,titulo,,NO,0,Fixture
+card,instalacion_frente,titulo,,NO,1,Fixture
+card,instalacion_nota,titulo,,NO,2,Fixture
+card,proceso_qa,grupo,proceso,SI,0,Fixture
+card,proceso_qa,titulo,Paso único QA,SI,0,Fixture
+card,proceso_qa,descripcion,Detalle paso QA,SI,0,Fixture
+card,proceso_qa,numero,01,SI,0,Fixture
+card,proceso_contacto,titulo,,NO,0,Fixture
+card,proceso_coordinacion,titulo,,NO,1,Fixture
+card,proceso_tramites,titulo,,NO,2,Fixture
+card,proceso_acompanamiento,titulo,,NO,3,Fixture
+precio,cremacion,titulo,Cremación QA,SI,0,Fixture
+precio,cremacion,descripcion,Descripción precio QA,SI,0,Fixture
+precio,cremacion,precio,$123.456 QA,SI,0,Fixture
+precio,cremacion,subtexto,Precio de prueba,SI,0,Fixture
+precio,cremacion,beneficio_1,Beneficio QA,SI,0,Fixture
+precio,cremacion,destacada,NO,SI,0,Fixture
+precio,velatorio,titulo,Velatorio QA destacado,SI,1,Fixture
+precio,velatorio,descripcion,Descripción velatorio QA,SI,1,Fixture
+precio,velatorio,precio,Consultar valor QA,SI,1,Fixture
+precio,velatorio,destacada,SI,SI,1,Fixture
+precio,traslado,titulo,Traslado oculto QA,NO,2,Fixture
+precio,traslado,precio,Importe oculto,NO,2,Fixture
+faq,qa_visible,pregunta,¿Pregunta editable QA?,SI,0,Fixture
+faq,qa_visible,respuesta,Respuesta editable QA,SI,0,Fixture
+faq,qa_hidden,pregunta,Pregunta oculta QA,NO,1,Fixture
+faq,qa_hidden,respuesta,No mostrar respuesta,NO,1,Fixture
+faq,horarios,pregunta,,NO,0,Fixture
+faq,cremaciones,pregunta,,NO,1,Fixture
+faq,velatorios,pregunta,,NO,2,Fixture
+faq,traslados,pregunta,,NO,3,Fixture
+faq,presupuesto,pregunta,,NO,4,Fixture
+faq,ubicacion,pregunta,,NO,5,Fixture
+zona,zona_1,nombre,Morón QA,SI,0,Fixture
+zona,zona_2,nombre,Castelar QA,SI,1,Fixture
+zona,zona_3,nombre,,NO,2,Fixture
+zona,zona_4,nombre,,NO,3,Fixture
+zona,zona_5,nombre,,NO,4,Fixture
+zona,zona_6,nombre,,NO,5,Fixture
+zona,zona_7,nombre,,NO,6,Fixture
+seo,home,titulo,SEO dinámico QA,SI,0,Fixture
+seo,home,descripcion,Descripción SEO dinámica QA,SI,0,Fixture
+seo,home,imagen,/assets/office-interior.png,SI,0,Fixture
