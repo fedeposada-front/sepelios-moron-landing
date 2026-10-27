@@ -95,3 +95,7 @@ Rama online: https://github.com/fedeposada-front/sepelios-moron-landing/tree/int
 Este último commit solo actualiza el informe para registrar la resolución del bloqueo. El código y las pruebas siguen siendo los de f2ad572. Se conserva el PASS previo de lint, 9/9 unitarias, build y 6/6 E2E; no se reejecutan por cambios exclusivamente documentales. El SHA final se identifica en el historial de la rama y se vuelve a contrastar con git ls-remote después de publicar este informe.
 
 Los pendientes visuales de navegación, WhatsApp y Footer descritos arriba continúan abiertos. No hubo merge, cambios en main, Google Sheets, Vercel o Ferozo, ni ejecución de ETAPA 2. La regla de código, documentación, pruebas y evidencias versionados en GitHub sigue vigente para cada etapa.
+
+## Continuación autorizada — ETAPA 2
+
+El cierre visual de los pendientes de navegación, WhatsApp y Footer se documenta en [STAGE2-VISUAL-VALIDATION.md](STAGE2-VISUAL-VALIDATION.md), partiendo del checkpoint a0083345. Las restricciones de configuración definitiva, servicios externos y publicación del sitio siguen vigentes. Los resultados anteriores de este informe son históricos; consultar el informe de ETAPA 2 para el estado visual actualizado.

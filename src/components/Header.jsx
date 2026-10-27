@@ -74,7 +74,9 @@ export default function Header() {
 
           <nav className="nav" aria-label="Navegación principal">
             {navItems(DESKTOP_NAV_IDS).map(section => (
-              <a href={`#${section.id}`} key={section.id}>{section.nav_label || NAV_LABELS[section.id]}</a>
+              <a href={`#${section.id}`} key={section.id}>{section.id === 'preguntas' && (!section.nav_label || section.nav_label === NAV_LABELS.preguntas)
+                ? 'Preguntas'
+                : section.nav_label || NAV_LABELS[section.id]}</a>
             ))}
           </nav>
 

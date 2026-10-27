@@ -17,7 +17,7 @@ export default function WhatsAppButton() {
         <a className="fab" href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label={data.header_whatsapp_label}>
           <span className="fab__pulse"></span>
           <WaIcon />
-          <span className="fab__label">{data.header_whatsapp_label}</span>
+          <span className="fab__label">WhatsApp</span>
         </a>
       )}
 

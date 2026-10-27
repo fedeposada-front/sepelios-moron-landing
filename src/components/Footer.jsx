@@ -3,7 +3,7 @@ import { buildTelHref } from '../cms/links'
 import { useSiteDataContext } from '../context/useSiteDataContext'
 import { CMSButtons } from './CMSBlocks'
 
-const FOOTER_NAV_IDS = ['instalaciones', 'proceso', 'cobertura', 'preguntas', 'contacto']
+const FOOTER_SERVICE_IDS = ['cremacion', 'velatorio', 'traslado', 'flores']
 
 export default function Footer() {
   const { data, cms } = useSiteDataContext()
@@ -11,7 +11,7 @@ export default function Footer() {
   const priceSection = cmsItem(cms, 'seccion', 'precios')
   const services = serviceSection?.mostrar === false
     ? []
-    : cmsItems(cms, 'servicio').filter(service => service.visible_en_servicios?.toLocaleUpperCase('es') !== 'NO')
+    : cmsItems(cms, 'servicio').filter(service => FOOTER_SERVICE_IDS.includes(service.id) && service.visible_en_servicios?.toLocaleUpperCase('es') !== 'NO')
 
   return (
     <footer className="footer">
@@ -31,13 +31,10 @@ export default function Footer() {
           <div>
             <h4>{data.footer_services_title}</h4>
             <ul>
-              {services.map(service => <li key={service.id}><a href="#servicios">{service.titulo}</a></li>)}
+              {services.map(service => <li key={service.id}><a href="#servicios">{service.id === 'traslado' && service.titulo === 'Traslados nacionales e internacionales'
+                ? 'Traslados'
+                : service.titulo}</a></li>)}
               {priceSection?.mostrar !== false && <li><a href="#precios">{priceSection?.nav_label || 'Precios'}</a></li>}
-              {FOOTER_NAV_IDS.map(id => {
-                const section = cmsItem(cms, 'seccion', id)
-                if (!section || section.mostrar === false || section.nav_visible?.toLocaleUpperCase('es') === 'NO') return null
-                return <li key={id}><a href={`#${id}`}>{section.nav_label || section.eyebrow}</a></li>
-              })}
             </ul>
           </div>
           <div>
