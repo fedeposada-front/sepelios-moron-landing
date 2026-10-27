@@ -1,0 +1,26 @@
+{
+  "capturedAt": "2026-10-27T12:23:40.172Z",
+  "sources": {
+    "qa": {
+      "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSqRLktGQwQUQD061cFV_Fsr5su9bI--Qc2VeA_XDKc_TKOgrZRDieslRgIKHs55-i-WE2odeZgkgyQ/pub?gid=266301715&single=true&output=csv",
+      "status": 200,
+      "contentType": "text/csv; charset=utf-8",
+      "bytes": 9289,
+      "sha256": "da4e182225b9c084491c7e40e7f6482b7588670dff507070caf2988ae5d028fe"
+    },
+    "original": {
+      "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSkSfWqKhzXqok3XzWRcfjktTa_N7DHjWZkyeBPuOxlF8KpsP8Ntq-WiNY09M-Is2Rim-MQaA_HyxqQ/pub?gid=266301715&single=true&output=csv",
+      "status": 200,
+      "contentType": "text/csv; charset=utf-8",
+      "bytes": 9289,
+      "sha256": "da4e182225b9c084491c7e40e7f6482b7588670dff507070caf2988ae5d028fe"
+    },
+    "legacy": {
+      "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSkSfWqKhzXqok3XzWRcfjktTa_N7DHjWZkyeBPuOxlF8KpsP8Ntq-WiNY09M-Is2Rim-MQaA_HyxqQ/pub?gid=0&single=true&output=csv",
+      "status": 401,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 9282,
+      "sha256": "5423d0736dd420c77e90f949685b10a1c987cb8fee4590bf999549c87b98c6a9"
+    }
+  }
+}

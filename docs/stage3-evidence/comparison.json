@@ -1,0 +1,341 @@
+{
+  "dataStatus": "PASS",
+  "overallStatus": "BLOCKED_LEGACY_ENDPOINT",
+  "reason": "Legacy endpoint from main is not the WEB_CMS endpoint; no writes or CMS URL changes are authorized.",
+  "checkpoint": "e8ec30b899ed5d18e8a396e05b6c12623a22d1f4",
+  "matchedKeys": 92,
+  "differences": [],
+  "requiredCellUpdates": [],
+  "qa": {
+    "records": 92,
+    "issues": [],
+    "services": [
+      "cremacion",
+      "traslado",
+      "flores",
+      "cementerios",
+      "personalizada"
+    ],
+    "prices": [
+      {
+        "id": "cremacion",
+        "featured": "SI",
+        "price": "$580.000"
+      },
+      {
+        "id": "traslado",
+        "featured": "NO",
+        "price": "Según distancia y gestión"
+      }
+    ],
+    "hero": {
+      "id": "hero",
+      "orden": 1,
+      "titulo": "Cremaciones con atención las 24 horas en Morón",
+      "descripcion": "Acompañamos a las familias en la coordinación de cremaciones y traslados, con trato humano y respetuoso en cada paso.",
+      "imagen": "/assets/storefront.png",
+      "imagen_alt": "Frente de Sepelios Morón en M. Sarratea 383, Morón",
+      "boton": "Contactar por WhatsApp",
+      "destacado": "24 horas",
+      "eyebrow": "Atención disponible ahora · 24 horas",
+      "nav_visible": "NO",
+      "mostrar": true,
+      "type": "seccion"
+    }
+  },
+  "original": {
+    "records": 92,
+    "issues": [],
+    "services": [
+      "cremacion",
+      "traslado",
+      "flores",
+      "cementerios",
+      "personalizada"
+    ],
+    "prices": [
+      {
+        "id": "cremacion",
+        "featured": "SI",
+        "price": "$580.000"
+      },
+      {
+        "id": "traslado",
+        "featured": "NO",
+        "price": "Según distancia y gestión"
+      }
+    ],
+    "hero": {
+      "id": "hero",
+      "orden": 1,
+      "titulo": "Cremaciones con atención las 24 horas en Morón",
+      "descripcion": "Acompañamos a las familias en la coordinación de cremaciones y traslados, con trato humano y respetuoso en cada paso.",
+      "imagen": "/assets/storefront.png",
+      "imagen_alt": "Frente de Sepelios Morón en M. Sarratea 383, Morón",
+      "boton": "Contactar por WhatsApp",
+      "destacado": "24 horas",
+      "eyebrow": "Atención disponible ahora · 24 horas",
+      "nav_visible": "NO",
+      "mostrar": true,
+      "type": "seccion"
+    }
+  },
+  "criticalCells": [
+    {
+      "key": "config + site + precio_cremacion",
+      "cell": "WEB_CMS!D11",
+      "column": "valor",
+      "current": "$580.000",
+      "approved": "$580.000",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "config + site + precio_cremacion",
+      "cell": "WEB_CMS!E11",
+      "column": "mostrar",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "seccion + hero + titulo",
+      "cell": "WEB_CMS!D33",
+      "column": "valor",
+      "current": "Cremaciones con atención las 24 horas en Morón\n",
+      "approved": "Cremaciones con atención las 24 horas en Morón\n",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "seccion + hero + titulo",
+      "cell": "WEB_CMS!E33",
+      "column": "mostrar",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "seccion + hero + descripcion",
+      "cell": "WEB_CMS!D34",
+      "column": "valor",
+      "current": "Acompañamos a las familias en la coordinación de cremaciones y traslados, con trato humano y respetuoso en cada paso.\n\n",
+      "approved": "Acompañamos a las familias en la coordinación de cremaciones y traslados, con trato humano y respetuoso en cada paso.\n\n",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "seccion + hero + descripcion",
+      "cell": "WEB_CMS!E34",
+      "column": "mostrar",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "seccion + hero + imagen",
+      "cell": "WEB_CMS!D45",
+      "column": "valor",
+      "current": "/assets/storefront.png",
+      "approved": "/assets/storefront.png",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "seccion + hero + imagen",
+      "cell": "WEB_CMS!E45",
+      "column": "mostrar",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "seccion + hero + boton",
+      "cell": "WEB_CMS!D46",
+      "column": "valor",
+      "current": "Contactar por WhatsApp",
+      "approved": "Contactar por WhatsApp",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "seccion + hero + boton",
+      "cell": "WEB_CMS!E46",
+      "column": "mostrar",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "servicio + velatorio + titulo",
+      "cell": "WEB_CMS!D50",
+      "column": "valor",
+      "current": "Salas velatorias",
+      "approved": "Salas velatorias",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "servicio + velatorio + titulo",
+      "cell": "WEB_CMS!E50",
+      "column": "mostrar",
+      "current": "NO",
+      "approved": "NO",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "servicio + velatorio + descripcion",
+      "cell": "WEB_CMS!D51",
+      "column": "valor",
+      "current": "Espacios sobrios, cómodos y preparados para recibir a familiares y allegados en un ambiente de calma y recogimiento.",
+      "approved": "Espacios sobrios, cómodos y preparados para recibir a familiares y allegados en un ambiente de calma y recogimiento.",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "servicio + velatorio + descripcion",
+      "cell": "WEB_CMS!E51",
+      "column": "mostrar",
+      "current": "NO",
+      "approved": "NO",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "servicio + velatorio + icono",
+      "cell": "WEB_CMS!D52",
+      "column": "valor",
+      "current": "house",
+      "approved": "house",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "servicio + velatorio + icono",
+      "cell": "WEB_CMS!E52",
+      "column": "mostrar",
+      "current": "NO",
+      "approved": "NO",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "seccion + hero + destacado",
+      "cell": "WEB_CMS!D86",
+      "column": "valor",
+      "current": "24 horas",
+      "approved": "24 horas",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "seccion + hero + destacado",
+      "cell": "WEB_CMS!E86",
+      "column": "mostrar",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "servicio + cremacion + visible_en_servicios",
+      "cell": "WEB_CMS!D87",
+      "column": "valor",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "servicio + cremacion + visible_en_servicios",
+      "cell": "WEB_CMS!E87",
+      "column": "mostrar",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "precio + cremacion + mostrar",
+      "cell": "WEB_CMS!D88",
+      "column": "valor",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "precio + cremacion + mostrar",
+      "cell": "WEB_CMS!E88",
+      "column": "mostrar",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "precio + cremacion + destacada",
+      "cell": "WEB_CMS!D89",
+      "column": "valor",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "precio + cremacion + destacada",
+      "cell": "WEB_CMS!E89",
+      "column": "mostrar",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "precio + velatorio + mostrar",
+      "cell": "WEB_CMS!D90",
+      "column": "valor",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "precio + velatorio + mostrar",
+      "cell": "WEB_CMS!E90",
+      "column": "mostrar",
+      "current": "NO",
+      "approved": "NO",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "precio + velatorio + destacada",
+      "cell": "WEB_CMS!D91",
+      "column": "valor",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "precio + velatorio + destacada",
+      "cell": "WEB_CMS!E91",
+      "column": "mostrar",
+      "current": "NO",
+      "approved": "NO",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "precio + traslado + mostrar",
+      "cell": "WEB_CMS!D92",
+      "column": "valor",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "precio + traslado + mostrar",
+      "cell": "WEB_CMS!E92",
+      "column": "mostrar",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "precio + traslado + destacada",
+      "cell": "WEB_CMS!D93",
+      "column": "valor",
+      "current": "NO",
+      "approved": "NO",
+      "action": "NO_CHANGE"
+    },
+    {
+      "key": "precio + traslado + destacada",
+      "cell": "WEB_CMS!E93",
+      "column": "mostrar",
+      "current": "SI",
+      "approved": "SI",
+      "action": "NO_CHANGE"
+    }
+  ]
+}

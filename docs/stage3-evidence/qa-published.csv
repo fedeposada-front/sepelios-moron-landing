@@ -1,0 +1,96 @@
+tipo,id,campo,valor,mostrar,orden,ayuda
+config,site,wa_msg_header,"Hola Sepelios Morón, necesito asistencia.",SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,wa_msg_asistencia,"Hola Sepelios Morón, necesito asistencia.",SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,telefono_principal,11-5413-3407,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,telefono_2,11-3918-7173,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,telefono_3,11-4975-6793,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,whatsapp_numero,5491154133407,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,direccion_calle,"M. Sarratea 383, Morón",SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,direccion_provincia,Provincia de Buenos Aires,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,horario_atencion,"Atención las 24 horas, todos los días del año",SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,precio_cremacion,$580.000,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,precio_cremacion_subtexto,,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,wa_msg_cremacion_consulta,"Hola, quiero consultar el valor de una cremación.",SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,wa_msg_cremacion_contratar,"Hola, quiero contratar el servicio de cremación. Vi que el valor es {precio}",SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,precio_velatorio,Consultar valor actualizado,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,precio_velatorio_subtexto,Presupuesto sin cargo por WhatsApp,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,wa_msg_velatorio_consulta,"Hola, quiero consultar el valor de un servicio velatorio.",SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,wa_msg_velatorio_contratar,"Hola, quiero contratar el servicio de velatorio. Vi que el valor es {precio}.",SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,precio_traslado,Según distancia y gestión,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,precio_traslado_subtexto,Le cotizamos según el destino,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,wa_msg_traslado_consulta,"Hola, quiero consultar el valor de un traslado.",SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,wa_msg_traslado_contratar,"Hola, quiero contratar el servicio de traslado. Vi que el valor es {precio}.",SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,precio_nota,Los valores se informan actualizados al momento de la consulta. Escribanos por WhatsApp y le enviamos un presupuesto claro y sin compromiso.,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,zona_principal,Morón,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,zona_2,Castelar,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,zona_3,Haedo,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,zona_4,Ituzaingó,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,zona_5,Ramos Mejía,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,zona_6,Merlo,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,zona_7,Zona Oeste,SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,wa_msg_faq,"Hola, tengo una consulta.",SI,0,Dato original migrado; no cambiar tipo/id/campo
+config,site,wa_msg_contacto,"Hola Sepelios Morón, necesito asistencia.",SI,0,Dato original migrado; no cambiar tipo/id/campo
+seccion,hero,titulo,"Cremaciones con atención las 24 horas en Morón
+",SI,1,Editable
+seccion,hero,descripcion,"Acompañamos a las familias en la coordinación de cremaciones y traslados, con trato humano y respetuoso en cada paso.
+
+",SI,1,Editable
+seccion,servicios,titulo,Servicios funerarios integrales,SI,2,Editable
+seccion,servicios,descripcion,"Acompañamos a cada familia con un servicio completo y cuidado, resolviendo cada detalle con respeto y profesionalismo.",SI,2,Editable
+seccion,confianza,titulo,Por qué elegir Sepelios Morón,SI,3,Editable
+seccion,instalaciones,titulo,Nuestras instalaciones,SI,4,Editable
+seccion,proceso,titulo,Un proceso claro y acompañado,SI,5,Editable
+seccion,cobertura,titulo,Atendemos en Morón y alrededores,SI,6,Editable
+seccion,precios,titulo,Servicios con precios claros,SI,7,Editable
+seccion,preguntas,titulo,Respondemos sus dudas,SI,8,Editable
+seccion,preguntas,descripcion,"Si tiene cualquier otra consulta, escríbanos por WhatsApp y le respondemos de inmediato, a cualquier hora.",SI,8,Editable
+seccion,contacto,titulo,Comunicate con nosotros,SI,9,Editable
+seccion,hero,imagen,/assets/storefront.png,SI,1,Editable
+seccion,hero,boton,Contactar por WhatsApp,SI,1,Editable
+servicio,cremacion,titulo,Cremaciones,SI,1,Editable
+servicio,cremacion,descripcion,"Servicio de cremación realizado con la máxima dignidad, ofreciendo distintas opciones de urnas y memoriales para la familia.",SI,1,Editable
+servicio,cremacion,icono,flame,SI,1,Editable
+servicio,velatorio,titulo,Salas velatorias,NO,2,Editable
+servicio,velatorio,descripcion,"Espacios sobrios, cómodos y preparados para recibir a familiares y allegados en un ambiente de calma y recogimiento.",NO,2,Editable
+servicio,velatorio,icono,house,NO,2,Editable
+servicio,traslado,titulo,Traslados nacionales e internacionales,SI,3,Editable
+servicio,traslado,descripcion,"Coordinación de traslados al interior y exterior del país, gestionando trámites y documentación de principio a fin.",SI,3,Editable
+servicio,traslado,icono,truck,SI,3,Editable
+servicio,flores,titulo,Servicios florales,SI,4,Editable
+servicio,flores,descripcion,Arreglos y ofrendas florales seleccionadas con buen gusto para acompañar la ceremonia y honrar la memoria.,SI,4,Editable
+servicio,flores,icono,flower,SI,4,Editable
+servicio,cementerios,titulo,Gestión en cementerios,SI,5,Editable
+servicio,cementerios,descripcion,"Tramitamos inhumaciones, nichos y toda la documentación necesaria ante cementerios públicos y privados.",SI,5,Editable
+servicio,cementerios,icono,file-text,SI,5,Editable
+servicio,personalizada,titulo,Atención personalizada,SI,6,Editable
+servicio,personalizada,descripcion,"Un asesor acompaña a la familia en todo momento, escuchando sus necesidades y resolviendo cada consulta con cercanía.",SI,6,Editable
+servicio,personalizada,icono,heart,SI,6,Editable
+faq,horarios,pregunta,¿Atienden las 24 horas?,SI,1,Editable
+faq,horarios,respuesta,"Sí. Sepelios Morón brinda atención fúnebre las 24 horas, todos los días del año. Puede comunicarse en cualquier momento por WhatsApp o teléfono y le responderemos de inmediato.",SI,1,Editable
+faq,cremaciones,pregunta,¿Realizan cremaciones en Morón?,SI,2,Editable
+faq,cremaciones,respuesta,"Realizamos servicios de cremación con la máxima dignidad, coordinando todo el proceso y ofreciendo distintas opciones de urnas y memoriales para la familia.",SI,2,Editable
+faq,velatorios,pregunta,¿Ofrecen salas velatorias?,SI,3,Editable
+faq,velatorios,respuesta,"Sí, contamos con salas velatorias sobrias y preparadas para recibir a familiares y allegados en un ambiente de calma, privacidad y respeto.",SI,3,Editable
+faq,traslados,pregunta,¿Hacen traslados al interior o exterior del país?,SI,4,Editable
+faq,traslados,respuesta,"Coordinamos traslados nacionales e internacionales, gestionando la documentación y los permisos necesarios de principio a fin, con ambulancia propia.",SI,4,Editable
+faq,presupuesto,pregunta,¿Puedo consultar precios por WhatsApp?,SI,5,Editable
+faq,presupuesto,respuesta,"Por supuesto. Escríbanos por WhatsApp al 11-5413-3407 y le enviamos un presupuesto claro y actualizado, sin compromiso, según el servicio que necesite.",SI,5,Editable
+faq,ubicacion,pregunta,¿Dónde están ubicados?,SI,6,Editable
+faq,ubicacion,respuesta,"Nuestra oficina está en M. Sarratea 383, Morón, Provincia de Buenos Aires. Atendemos en Morón y toda la Zona Oeste: Castelar, Haedo, Ituzaingó, Ramos Mejía y Merlo.",SI,6,Editable
+zona,zona_1,nombre,Morón,SI,1,Editable
+zona,zona_2,nombre,Castelar,SI,2,Editable
+zona,zona_3,nombre,Haedo,SI,3,Editable
+zona,zona_4,nombre,Ituzaingó,SI,4,Editable
+zona,zona_5,nombre,Ramos Mejía,SI,5,Editable
+zona,zona_6,nombre,Merlo,SI,6,Editable
+zona,zona_7,nombre,Zona Oeste,SI,7,Editable
+seo,home,titulo,Sepelios Morón | Atención fúnebre las 24 horas,SI,1,Editable
+seo,home,descripcion,"Sepelios Morón. Cremaciones, salas velatorias y traslados. Atención las 24 horas.",SI,1,Editable
+seccion,hero,destacado,24 horas,SI,1,Fragmento exacto del título para destacar en cursiva
+servicio,cremacion,visible_en_servicios,SI,SI,1,NO oculta solo esta tarjeta de servicios
+precio,cremacion,mostrar,SI,SI,1,NO oculta la tarjeta de precio
+precio,cremacion,destacada,SI,SI,1,SI destaca la tarjeta de cremación
+precio,velatorio,mostrar,SI,NO,2,NO oculta la tarjeta de precio
+precio,velatorio,destacada,SI,NO,2,SI destaca la tarjeta de velatorio
+precio,traslado,mostrar,SI,SI,3,NO oculta la tarjeta de precio
+precio,traslado,destacada,NO,SI,3,SI destaca la tarjeta de traslado
