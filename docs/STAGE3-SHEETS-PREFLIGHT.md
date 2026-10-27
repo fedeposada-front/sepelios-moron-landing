@@ -75,3 +75,9 @@ La ejecución exitosa del script acredita los datos respaldados, no una disponib
 5. Verificar cinco servicios, dos precios, Cremación destacada, $580.000 y hero aprobado antes de considerar configuración definitiva. No mezclar ese paso con merge, despliegue ni publicación del sitio. Una reversión futura de conexión debe volver al checkpoint QA; actualmente no hay datos editados que restaurar.
 
 La entrega documental y los respaldos se publican exclusivamente en la rama de integración. El SHA remoto se informa en el cierre tras comprobar igualdad exacta con HEAD local y acceso GitHub. La condición operativa queda reportada para decisión del usuario; no se amplía el alcance para resolverla.
+
+### Integridad del respaldo en Git
+
+La comprobación posterior al primer push detectó normalización CRLF/LF de Git en los dos CSV: el blob versionado no mantenía los 9289 bytes de la respuesta original. Se corrigió con una regla acotada en .gitattributes (docs/stage3-evidence/*-published.csv -text -diff) y se volvieron a agregar solo esos respaldos. Esa regla conserva sus bytes exactos y permite reproducir el SHA-256 en distintos sistemas; no afecta el código de la aplicación ni otros CSV. Se repitió el validador y se comprueba el tamaño/hash de los blobs remotos antes del cierre.
+
+Se marca también -diff para que Git trate esos respaldos como bytes y no confunda sus CRLF originales con espacios accidentales; los datos comparables están disponibles en los JSON y en la tabla.

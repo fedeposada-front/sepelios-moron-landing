@@ -1,0 +1,3 @@
+
+# Preserve the exact published CSV backup bytes for SHA-256 verification.
+docs/stage3-evidence/*-published.csv -text -diff
