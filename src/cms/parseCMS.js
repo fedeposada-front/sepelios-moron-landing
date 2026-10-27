@@ -1,6 +1,6 @@
 import { DEFAULT_COLLECTIONS, DEFAULT_CONFIG } from './defaults.js'
 
-export const CMS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqRLktGQwQUQD061cFV_Fsr5su9bI--Qc2VeA_XDKc_TKOgrZRDieslRgIKHs55-i-WE2odeZgkgyQ/pub?gid=266301715&single=true&output=csv'
+export const CMS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSkSfWqKhzXqok3XzWRcfjktTa_N7DHjWZkyeBPuOxlF8KpsP8Ntq-WiNY09M-Is2Rim-MQaA_HyxqQ/pub?gid=266301715&single=true&output=csv'
 
 const TYPES = new Set(['config', ...Object.keys(DEFAULT_COLLECTIONS), 'aviso', 'boton'])
 const CONFIG_FIELDS = new Set(Object.keys(DEFAULT_CONFIG))
