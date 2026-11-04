@@ -1,0 +1,60 @@
+name: QA sucursal y casa principal
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/qa-sucursal.yml]
+  workflow_dispatch:
+
+jobs:
+  qa-relacion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Build de producción
+        run: npm ci --no-audit --no-fund && npm run build
+      - name: Herramientas para QA
+        run: npm install --no-save --no-audit --no-fund playwright-core@1.56.1
+      - name: Probar vínculos en Chromium 390 y 1366 px
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/vite-preview.log 2>&1 &
+          for i in $(seq 1 30); do if curl -fsS http://127.0.0.1:4173/ -o /dev/null; then break; fi; sleep 1; done
+          node <<'NODE'
+          const {chromium}=require('playwright-core');
+          const assert=require('node:assert/strict');
+          (async()=>{
+            const browser=await chromium.launch({headless:true,executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
+            for(const width of [390,1366]){
+              const page=await browser.newPage({viewport:{width,height:844},isMobile:width===390,hasTouch:width===390});
+              const errors=[];page.on('pageerror',e=>errors.push(e.message));
+              const res=await page.goto('http://127.0.0.1:4173/',{waitUntil:'domcontentloaded',timeout:30000});
+              assert.equal(res.status(),200);
+              const links=page.locator('a[href="https://sepelios-el-angel.onrender.com/"]');
+              assert.equal(await links.count(),2,'Debe haber dos enlaces a la casa principal');
+              const footer=page.locator('footer .footer__headquarters'),contact=page.locator('.contact-card .contact-card__headquarters');
+              assert(await footer.count()===1 && await contact.count()===1);
+              await footer.scrollIntoViewIfNeeded();
+              assert(await footer.locator('a').isVisible());
+              await contact.scrollIntoViewIfNeeded();
+              assert(await contact.locator('a').isVisible());
+              const measures=await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,footerText:document.querySelector('.footer__headquarters')?.innerText,contactText:document.querySelector('.contact-card__headquarters')?.innerText}));
+              assert(measures.scrollWidth<=width+3,'Desborde horizontal');
+              assert(measures.footerText.includes('Darwin 1353') && measures.contactText.includes('Villa Bosch'));
+              assert.deepEqual(errors,[]);
+              console.log('PASS '+width+'px '+JSON.stringify(measures));
+              await page.close();
+            }
+            await browser.close();
+          })().catch(e=>{console.error('QA FAILED',e);process.exit(1)});
+          NODE
+      - name: Empaquetar versión lista para hosting
+        run: cd dist && zip -qr ../sepelios-moron-release.zip .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sepelios-moron-release
+          path: sepelios-moron-release.zip
+          retention-days: 14
