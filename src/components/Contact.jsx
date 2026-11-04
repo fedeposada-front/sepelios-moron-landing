@@ -60,6 +60,10 @@ export default function Contact() {
           <div className="contact-card reveal">
             <h3>Sepelios Morón</h3>
             <p>{data.direccion_calle} — {data.direccion_provincia}</p>
+            <p className="contact-card__headquarters">
+              Sucursal de <a href="https://sepelios-el-angel.onrender.com/" target="_blank" rel="noopener noreferrer">Sepelios El Ángel ↗</a>
+              <span>Casa principal · Darwin 1353 · Villa Bosch</span>
+            </p>
             <div className="map">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.1015805950483!2d-58.612705924778936!3d-34.65213747293689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc75254215991%3A0x1bace90429f3b6e8!2sSepelios%20moron!5e0!3m2!1ses-419!2sar!4v1782443380192!5m2!1ses-419!2sar"
