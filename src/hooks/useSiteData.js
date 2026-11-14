@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { parsePublishedCsv } from '../utils/parseCsv'
 
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSkSfWqKhzXqok3XzWRcfjktTa_N7DHjWZkyeBPuOxlF8KpsP8Ntq-WiNY09M-Is2Rim-MQaA_HyxqQ/pub?gid=0&single=true&output=csv'
 
@@ -70,16 +71,16 @@ export function useSiteData() {
 
   useEffect(() => {
     fetch(CSV_URL)
-      .then(r => r.text())
+      .then(r => {
+        if (!r.ok) throw new Error('Google Sheets HTTP ' + r.status)
+        return r.text()
+      })
       .then(text => {
-        const lines = text.trim().split('\n').slice(1)
+        const rows = parsePublishedCsv(text)
+        if (rows.length < 2) throw new Error('Google Sheets devolvió datos insuficientes')
         const parsed = {}
-        lines.forEach(line => {
-          const commaIndex = line.indexOf(',')
-          if (commaIndex === -1) return
-          const key = line.slice(0, commaIndex).trim().replace(/^"|"$/g, '')
-          const value = line.slice(commaIndex + 1).trim().replace(/^"|"$/g, '')
-          if (key) parsed[key] = value
+        rows.slice(1).forEach(([key, ...values]) => {
+          if (key?.trim()) parsed[key.trim()] = values.join(',').trim()
         })
         parsed.telefono_principal_tel = normalizeArgPhone(parsed.telefono_principal || FALLBACK.telefono_principal)
         parsed.telefono_2_tel = normalizeArgPhone(parsed.telefono_2 || FALLBACK.telefono_2)
