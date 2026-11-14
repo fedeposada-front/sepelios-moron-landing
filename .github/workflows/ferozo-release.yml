@@ -1,0 +1,42 @@
+name: Ferozo Morón release
+on:
+  push:
+    branches: [main]
+    paths:
+      - src/**
+      - public/**
+      - package.json
+      - package-lock.json
+      - index.html
+      - vite.config.js
+      - .github/workflows/ferozo-release.yml
+  workflow_dispatch:
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install and build
+        run: npm ci --no-audit --no-fund && npm run build
+      - name: Check new El Ángel links
+        run: |
+          grep -R -q 'https://sepelioselangel.com.ar/' dist
+          if grep -R -q 'https://sepelios-el-angel.onrender.com/' dist; then
+            echo "ERROR: old staging link remains"
+            exit 1
+          fi
+          test -f dist/index.html
+      - name: Package Ferozo document root
+        run: mkdir -p release && cd dist && zip -q -r ../release/sepelios-moron-ferozo.zip .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sepelios-moron-ferozo
+          path: release/sepelios-moron-ferozo.zip
+          if-no-files-found: error
+          retention-days: 14
