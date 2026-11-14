@@ -32,9 +32,14 @@ jobs:
             exit 1
           fi
           test -f dist/index.html
+          test -f dist/.htaccess
+          test -f dist/og-image.png
+          test -f dist/robots.txt
+          test -f dist/sitemap.xml
       - uses: actions/upload-artifact@v4
         with:
           name: sepelios-moron-ferozo
           path: dist/
           if-no-files-found: error
+          include-hidden-files: true
           retention-days: 14
