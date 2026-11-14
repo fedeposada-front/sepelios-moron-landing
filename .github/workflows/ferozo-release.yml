@@ -32,11 +32,9 @@ jobs:
             exit 1
           fi
           test -f dist/index.html
-      - name: Package Ferozo document root
-        run: mkdir -p release && cd dist && zip -q -r ../release/sepelios-moron-ferozo.zip .
       - uses: actions/upload-artifact@v4
         with:
           name: sepelios-moron-ferozo
-          path: release/sepelios-moron-ferozo.zip
+          path: dist/
           if-no-files-found: error
           retention-days: 14
