@@ -17,7 +17,7 @@ export default function Footer() {
             </div>
             <p>Atención fúnebre integral en Morón y Zona Oeste. Cremaciones, salas velatorias, traslados y acompañamiento humano para cada familia.</p>
             <p className="footer__headquarters">
-              Sucursal de <a href="https://sepelios-el-angel.onrender.com/" target="_blank" rel="noopener noreferrer">Sepelios El Ángel ↗</a>
+              Sucursal de <a href="https://sepelioselangel.com.ar/" target="_blank" rel="noopener noreferrer">Sepelios El Ángel ↗</a>
               <span>Casa principal · Darwin 1353 · Villa Bosch</span>
             </p>
           </div>
