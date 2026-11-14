@@ -22,6 +22,16 @@ jobs:
         with:
           node-version: '22'
           cache: npm
+      - name: Test Google Sheets CSV parser
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict'
+          import {parsePublishedCsv} from './src/utils/parseCsv.js'
+          const csv = 'key,value\r\na,"Hola, mundo"\r\nb,"Línea 1\nLínea 2"\r\nc,"Nombre ""doble"""\r\n'
+          assert.deepEqual(parsePublishedCsv(csv), [['key','value'],['a','Hola, mundo'],['b','Línea 1\nLínea 2'],['c','Nombre "doble"']])
+          assert.deepEqual(parsePublishedCsv('\uFEFFkey,value\r\nx,ok'), [['key','value'],['x','ok']])
+          console.log('PASS: CSV quotes, commas, multiline, UTF-8 BOM and CRLF')
+          NODE
       - name: Install and build
         run: npm ci --no-audit --no-fund && npm run build
       - name: Check new El Ángel links
