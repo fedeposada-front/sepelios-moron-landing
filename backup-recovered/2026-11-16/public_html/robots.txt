@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.sepeliosmoron.com.ar/sitemap.xml

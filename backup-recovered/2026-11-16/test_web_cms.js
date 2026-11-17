@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+let readyHandler=null;
+const sandbox={document:{readyState:'loading',addEventListener:(type,cb)=>{if(type==='DOMContentLoaded')readyHandler=cb},documentElement:{}},window:{},MutationObserver:class{observe(){}},console,requestAnimationFrame(){} };
+vm.runInNewContext(fs.readFileSync(__dirname+'/moron-web-cms.js','utf8'),sandbox);
+const rows='tipo,id,campo,valor,mostrar,orden,ayuda\nservicio,cremacion,titulo,Cremaciones,SI,1,x\nservicio,cremacion,descripcion,"Respetamos, cada detalle",SI,1,x\nservicio,velatorio,titulo,Velatorio,NO,2,x\nservicio,nuevo,titulo,Servicio nuevo,SI,3,x\nfaq,velatorios,pregunta,Hay salas?,SI,4,x\n';
+const r=sandbox.window.MoronCMS.parseCms(rows);
+assert.equal(r.servicio.get('cremacion').descripcion,'Respetamos, cada detalle');
+assert.equal(r.servicio.get('velatorio').mostrar,false);
+assert.equal(r.servicio.get('nuevo').titulo,'Servicio nuevo');
+assert.equal(r.faq.get('velatorios').mostrar,true);
+console.log('PASS: CSV con comillas, tipos, mostrar NO, servicios nuevos y FAQ');
