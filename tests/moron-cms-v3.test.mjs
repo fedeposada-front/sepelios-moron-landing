@@ -27,6 +27,21 @@ const elements = {
   cta: { href: 'https://wa.me/5491154133407' },
   note: { textContent: '' }
 };
+const h1 = {
+  textContent: 'Título anterior',
+  nodes: [],
+  querySelector(sel) { return sel === 'em' ? this.nodes.find(n => n.tagName === 'EM') || null : null; },
+  querySelectorAll(sel) { return sel === 'em' ? this.nodes.filter(n => n.tagName === 'EM') : []; },
+  replaceChildren(...nodes) { this.nodes = nodes; this.textContent = nodes.map(n => n.textContent).join(''); }
+};
+const hero = {
+  hidden: false, style: { display: '' },
+  querySelector(sel) {
+    if (sel === 'h1') return h1;
+    if (sel === '.hero__sub') return elements.desc;
+    return null;
+  }
+};
 const toggles = {};
 const card = {
   dataset: {},
@@ -47,12 +62,13 @@ const document = {
   readyState: 'complete',
   documentElement: { classList: { toggle() {} } },
   querySelector(sel) {
+    if (sel === '.hero') return hero;
     if (sel === '#precios .pricing-grid') return { children: [card] };
     if (sel === '#precios .pricing-note') return elements.note;
     return null;
   },
   querySelectorAll() { return []; },
-  createElement() { return { textContent: '' }; },
+  createElement(tagName) { return { tagName: tagName.toUpperCase(), textContent: '' }; },
   createTextNode(text) { return { textContent: text }; }
 };
 const ctx = {
@@ -67,6 +83,8 @@ const ctx = {
 };
 vm.runInNewContext(script,ctx);
 await new Promise(resolve => setTimeout(resolve, 30));
+assert.equal(h1.textContent,'Cremaciones con atención las 24 horas en Morón y alrededores');
+assert.equal(h1.querySelector('em').textContent,'24 horas');
 assert.equal(elements.price.textContent,'$580.000');
 assert.equal(elements.name.textContent,'Cremaciones');
 assert.equal(elements.desc.textContent,'Servicio de cremación');
