@@ -40,14 +40,22 @@ function readCms(input){
  const rows=csvRows(input);const header=rows.shift().map(x=>normalize(x));
  const col=name=>header.indexOf(name);
  for(const name of ['tipo','id','campo','valor','mostrar','orden'])if(col(name)<0)throw Error('Falta columna WEB_CMS: '+name);
- const result={servicio:new Map(),faq:new Map(),seccion:new Map(),config:new Map(),seo:new Map(),zona:new Map()};
+ const result={servicio:new Map(),faq:new Map(),seccion:new Map(),config:new Map(),seo:new Map(),zona:new Map(),social:new Map(),imagen:new Map(),precio:new Map()};
  for(const row of rows){
   const tipo=normalize(row[col('tipo')]),id=String(row[col('id')]||'').trim(),campo=normalize(row[col('campo')]);
   if(!result[tipo]||!id||!campo)continue;
   const key=tipo==='config'?id+'|'+campo:id;
   const item=result[tipo].get(key)||{id};
   item[campo]=String(row[col('valor')]??'').trim();
-  item.mostrar=normalize(row[col('mostrar')])!=='no';
+  const urlColumn=['enlace / url','enlace_url','enlace','url'].map(col).find(i=>i>=0);
+  const url=urlColumn==null?'':String(row[urlColumn]??'').trim();
+  if(url)item.enlace=url;
+  const visible=normalize(row[col('mostrar')])!=='no';
+  // La visibilidad del servicio o sección la decide su fila 'titulo',
+  // no la última fila (precio, imagen, descripción, etc.) del mismo ID.
+  if(tipo==='servicio'||tipo==='seccion'){
+   if(campo==='titulo'||item.mostrar==null)item.mostrar=visible;
+  }else item.mostrar=visible;
   item.orden=Number(row[col('orden')])||999;
   result[tipo].set(key,item);
  }
@@ -78,7 +86,7 @@ function services(){
   }
   if(item.titulo)update(card.querySelector('h3'),item.titulo);
   if(item.descripcion)update(card.querySelector('p'),item.descripcion);
-  card.hidden=!canShow(item);
+  card.hidden=!canShow(item)||normalize(item.visible_en_servicios)==='no';
   if(card.hidden){card.style.display='none';}else if(card.style.display==='none'){card.style.removeProperty('display');}
   card.dataset.cmsOrder=String(item.orden||999);
  }
@@ -132,33 +140,121 @@ function faqs(){
  const current=[...wrap.children].filter(x=>expected.includes(x));
  if(expected.some((el,i)=>current[i]!==el))for(const node of expected)wrap.appendChild(node);
 }
+function configRow(field){return cms.config.get('site|'+field);}
+function configValue(field){const row=configRow(field);return row?.[field]??'';}
+function safeHttps(input){
+ try{
+  const url=new URL(String(input||'').trim(),window.location.origin);
+  if(url.protocol!=='https:')return '';
+  return url.href;
+ }catch(_){return '';}
+}
+function priceVisible(item){return canShow(item)&&normalize(item?.precio_mostrar||'si')!=='no';}
 function pricing(){
  const wrap=document.querySelector('#precios .pricing-grid');if(!wrap)return;
  for(const el of [...wrap.children]){
   const label=normalize(el.querySelector('.price-card__name')?.textContent);
-  const id=/velator/.test(label)?'velatorio':/cremac/.test(label)?'cremacion':/traslad/.test(label)?'traslado':null;
+  const id=el.dataset.cmsPriceId||(/velator/.test(label)?'velatorio':/cremac/.test(label)?'cremacion':/traslad/.test(label)?'traslado':null);
   if(!id)continue;
-  const shown=canShow(cms.servicio.get(id));
+  el.dataset.cmsPriceId=id;
+  const item=cms.servicio.get(id);
+  const shown=priceVisible(item);
   el.hidden=!shown;el.style.display=shown?'':'none';
-  if(id==='cremacion'){
-    const price=cms.config.get('site|precio_cremacion')?.valor;
-    if(price){const b=el.querySelector('.price-card__value b');update(b,price);}
+  if(!shown)continue;
+  if(item?.titulo)update(el.querySelector('.price-card__name'),item.titulo);
+  if(item?.descripcion)update(el.querySelector('.price-card__desc'),item.descripcion);
+  const value=item?.precio||configValue('precio_'+id);
+  if(value)update(el.querySelector('.price-card__value b'),value);
+  const subtitle=item?.precio_subtexto||configValue('precio_'+id+'_subtexto');
+  if(subtitle)update(el.querySelector('.price-card__value small'),subtitle);
+  if(item?.precio_destacada!=null)el.classList.toggle('is-featured',normalize(item.precio_destacada)==='si');
+  const message=item?.whatsapp_consulta||configValue('wa_msg_'+id+'_consulta');
+  const phone=String(configValue('whatsapp_numero')||'').replace(/\\D/g,'');
+  const cta=el.querySelector('a.btn[href*="wa.me"]');
+  if(cta&&message&&/^[1-9]\\d{8,14}$/.test(phone)){
+   const href='https://wa.me/'+phone+'?text='+encodeURIComponent(message);
+   if(cta.href!==href)cta.href=href;
   }
  }
+ const note=configValue('precio_nota');
+ if(note)update(document.querySelector('#precios .pricing-note'),note);
 }
-function updateHeroTitle(node, fullTitle, emphasized) {
- if(!node||!fullTitle)return;
- const title=String(fullTitle).trim();
- const fragment=String(emphasized||'').trim();
- const index=fragment?title.toLocaleLowerCase('es').indexOf(fragment.toLocaleLowerCase('es')):-1;
- if(index<0){
-  if(node.textContent!==title||node.querySelector('em'))node.textContent=title;
-  return;
+function socials(){
+ const contact=[...document.querySelectorAll('.footer__top > div')].find(x=>/contacto/i.test(x.querySelector('h4')?.textContent||''));
+ const list=contact?.querySelector('ul');if(!list)return;
+ const socials=sortVisible(cms.social);
+ const instagram=list.querySelector('a[href*="instagram.com"]');
+ if(!cms.social.size)return;
+ const original=instagram?.closest('li')||list.querySelector('li[data-cms-instagram-original]');
+ if(original)original.dataset.cmsInstagramOriginal='1';
+ const desired=new Set();
+ for(const item of socials){
+  const href=safeHttps(item.enlace||item.url);
+  if(!href)continue;
+  const id=normalize(item.id);
+  desired.add(id);
+  const label=item.titulo||item.nombre||item.id;
+  if(id==='instagram'&&original){
+   if(original.hidden)original.hidden=false;
+   if(original.style.display==='none')original.style.removeProperty('display');
+   const anchor=original.querySelector('a');
+   if(anchor&&anchor.href!==href)anchor.href=href;
+   if(anchor){const node=[...anchor.childNodes].find(x=>x.nodeType===Node.TEXT_NODE);if(node)update(node,label);else anchor.appendChild(document.createTextNode(label));}
+   continue;
+  }
+  let node=[...list.querySelectorAll('li[data-cms-social]')].find(li=>li.dataset.cmsSocial===id);
+  if(!node){node=document.createElement('li');node.dataset.cmsSocial=id;const a=document.createElement('a');a.target='_blank';a.rel='noopener noreferrer';node.appendChild(a);list.appendChild(node);}
+  const a=node.querySelector('a');
+  if(a.href!==href)a.href=href;
+  update(a,label);
  }
- const match=title.slice(index,index+fragment.length);
- if(node.textContent===title&&node.querySelectorAll('em').length===1&&node.querySelector('em').textContent===match)return;
- const em=document.createElement('em');em.textContent=match;
- node.replaceChildren(document.createTextNode(title.slice(0,index)),em,document.createTextNode(title.slice(index+fragment.length)));
+ if(original&&!desired.has('instagram')){original.hidden=true;original.style.display='none';}
+ for(const li of list.querySelectorAll('li[data-cms-social]'))if(!desired.has(li.dataset.cmsSocial))li.remove();
+}
+function sortVisible(map){return [...map.values()].filter(x=>x.mostrar!==false).sort((a,b)=>(a.orden||999)-(b.orden||999));}
+function emailContact(){
+ const row=configRow('email');
+ const email=String(configValue('email')||'').trim();
+ const valid=row?.mostrar!==false&&/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
+ const contact=[...document.querySelectorAll('.footer__top > div')].find(x=>/contacto/i.test(x.querySelector('h4')?.textContent||''));
+ const list=contact?.querySelector('ul');
+ let li=list?.querySelector('li[data-cms-email]');
+ const lines=document.querySelector('#contacto .contact-lines');
+ let line=lines?.querySelector('[data-cms-email-line]');
+ if(!valid){li?.remove();line?.remove();return;}
+ if(list){
+  if(!li){li=document.createElement('li');li.dataset.cmsEmail='1';const a=document.createElement('a');li.appendChild(a);list.appendChild(li);}
+  const a=li.querySelector('a');a.href='mailto:'+email;update(a,email);
+ }
+ if(lines){
+  if(!line){
+   line=document.createElement('div');line.className='cline';line.dataset.cmsEmailLine='1';
+   const icon=document.createElement('span');icon.className='cline__ic';icon.textContent='✉';
+   const body=document.createElement('div');body.className='cline__body';
+   const label=document.createElement('label');label.textContent='Correo electrónico';
+   const a=document.createElement('a');body.append(label,a);line.append(icon,body);lines.appendChild(line);
+  }
+  const a=line.querySelector('a');a.href='mailto:'+email;update(a,email);
+ }
+}
+function images(){
+ const byId={
+  logo:'.brand__mark, .footer__brand img',
+  hero:'.hero__media img',
+  atencion24:'img[alt*="Atención 24"]',
+  instalaciones:'img[alt*="Sala de atención"]',
+  frente:'img[alt*="Frente de Sepelios Morón en M. Sarratea 383"]',
+  cobertura:'img[alt*="Mapa de cobertura"]'
+ };
+ for(const [id,selector] of Object.entries(byId)){
+  const item=cms.imagen.get(id);
+  const url=item?.mostrar!==false?safeHttps(item?.enlace||item?.url):'';
+  for(const img of document.querySelectorAll(selector)){
+   if(!img.dataset.cmsOriginalSrc)img.dataset.cmsOriginalSrc=img.getAttribute('src')||'';
+   const intended=url||img.dataset.cmsOriginalSrc;
+   if(intended&&img.getAttribute('src')!==intended)img.setAttribute('src',intended);
+  }
+ }
 }
 function sections(){
  const selectors={hero:'.hero',servicios:'#servicios',confianza:'#confianza',instalaciones:'#instalaciones',proceso:'#proceso',cobertura:'#cobertura',precios:'#precios',preguntas:'#preguntas',contacto:'#contacto'};
@@ -224,7 +320,7 @@ function angelLink(){
  const anchor=ref.querySelector('a');
  if(anchor&&anchor.href!==ANGEL)anchor.href=ANGEL;
 }
-function apply(){if(running)return;running=true;try{services();faqs();pricing();sections();cleanVelatorioCopy();angelLink();}catch(err){console.error('[Morón CMS] Error al dibujar CMS',err);}finally{running=false;}}
+function apply(){if(running)return;running=true;try{services();faqs();pricing();sections();socials();emailContact();images();cleanVelatorioCopy();angelLink();}catch(err){console.error('[Morón CMS] Error al dibujar CMS',err);}finally{running=false;}}
 function queue(){if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;apply();});}
 window.MoronCMS={getState:()=>({loaded,serviceCount:cms.servicio.size,services:[...cms.servicio.values()].map(s=>({id:s.id,mostrar:s.mostrar,orden:s.orden}))}),parseCsv:csvRows,parseCms:readCms,refresh:()=>fetchData()};
 async function fetchData(){
