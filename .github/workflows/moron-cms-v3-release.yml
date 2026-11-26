@@ -1,0 +1,31 @@
+name: Morón CMS v3 QA and Ferozo package
+on:
+  push:
+    branches:
+      - feature/moron-cms-v3-sheet-prices-social-20261126
+    paths:
+      - moron-web-cms.js
+      - tests/moron-cms-v3.test.mjs
+      - .github/workflows/moron-cms-v3-release.yml
+  workflow_dispatch:
+jobs:
+  test-and-package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate JavaScript syntax
+        run: node --check moron-web-cms.js
+      - name: Validate Sheets mapping, price and highlighting
+        run: node tests/moron-cms-v3.test.mjs
+      - name: Package just the production CMS script
+        uses: actions/upload-artifact@v4
+        with:
+          name: sepelios-moron-cms-v3-ferozo
+          path: moron-web-cms.js
+          if-no-files-found: error
+          retention-days: 14
