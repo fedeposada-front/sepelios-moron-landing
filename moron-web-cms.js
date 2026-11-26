@@ -258,6 +258,20 @@ function images(){
   }
  }
 }
+function updateHeroTitle(node, fullTitle, emphasized) {
+ if(!node||!fullTitle)return;
+ const title=String(fullTitle).trim();
+ const fragment=String(emphasized||'').trim();
+ const index=fragment?title.toLocaleLowerCase('es').indexOf(fragment.toLocaleLowerCase('es')):-1;
+ if(index<0){
+  if(node.textContent!==title||node.querySelector('em'))node.textContent=title;
+  return;
+ }
+ const match=title.slice(index,index+fragment.length);
+ if(node.textContent===title&&node.querySelectorAll('em').length===1&&node.querySelector('em').textContent===match)return;
+ const em=document.createElement('em');em.textContent=match;
+ node.replaceChildren(document.createTextNode(title.slice(0,index)),em,document.createTextNode(title.slice(index+fragment.length)));
+}
 function sections(){
  const selectors={hero:'.hero',servicios:'#servicios',confianza:'#confianza',instalaciones:'#instalaciones',proceso:'#proceso',cobertura:'#cobertura',precios:'#precios',preguntas:'#preguntas',contacto:'#contacto'};
  for(const item of cms.seccion.values()){
