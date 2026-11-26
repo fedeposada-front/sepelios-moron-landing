@@ -1,0 +1,27 @@
+name: Morón CMS hero highlight release
+on:
+  push:
+    branches:
+      - fix/hero-highlight-cms-20261126
+    paths:
+      - .github/workflows/hero-highlight-release.yml
+      - moron-web-cms.js
+  workflow_dispatch:
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate hero emphasis behavior
+        run: |
+          grep -q "updateHeroTitle(sec.querySelector('h1'),item.titulo,item.destacado)" moron-web-cms.js
+          grep -q "266301715" moron-web-cms.js
+          node --check moron-web-cms.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sepelios-moron-cms-hero-highlight
+          path: moron-web-cms.js
+          if-no-files-found: error
+          retention-days: 14
