@@ -19,7 +19,7 @@ const fallback={servicio:new Map([
  ['flores',{titulo:'Servicios florales',mostrar:true,orden:4}],
  ['cementerios',{titulo:'Gestión en cementerios',mostrar:true,orden:5}],
  ['personalizada',{titulo:'Atención personalizada',mostrar:true,orden:6}]
- ]),faq:new Map(),seccion:new Map(),config:new Map(),seo:new Map(),zona:new Map()};
+ ]),faq:new Map(),seccion:new Map(),config:new Map(),seo:new Map(),zona:new Map(),social:new Map(),imagen:new Map(),precio:new Map()};
 let cms=fallback, loaded=false, scheduled=false, running=false;
 function csvRows(input){
  const res=[];let row=[],field='',quoted=false;
@@ -42,7 +42,7 @@ function readCms(input){
  for(const name of ['tipo','id','campo','valor','mostrar','orden'])if(col(name)<0)throw Error('Falta columna WEB_CMS: '+name);
  const result={servicio:new Map(),faq:new Map(),seccion:new Map(),config:new Map(),seo:new Map(),zona:new Map(),social:new Map(),imagen:new Map(),precio:new Map()};
  for(const row of rows){
-  const tipo=normalize(row[col('tipo')]),id=String(row[col('id')]||'').trim(),campo=normalize(row[col('campo')]);
+  const tipoOriginal=normalize(row[col('tipo')]),tipo=tipoOriginal==='image'?'imagen':tipoOriginal,id=String(row[col('id')]||'').trim(),campo=normalize(row[col('campo')]);
   if(!result[tipo]||!id||!campo)continue;
   const key=tipo==='config'?id+'|'+campo:id;
   const item=result[tipo].get(key)||{id};
@@ -245,7 +245,7 @@ function images(){
   hero:'.hero__media img',
   atencion24:'img[alt*="Atención 24"]',
   instalaciones:'img[alt*="Sala de atención"]',
-  frente:'img[alt*="Frente de Sepelios Morón en M. Sarratea 383"]',
+  frente:'img[alt="Frente de Sepelios Morón en M. Sarratea 383"]',
   cobertura:'img[alt*="Mapa de cobertura"]'
  };
  for(const [id,selector] of Object.entries(byId)){
