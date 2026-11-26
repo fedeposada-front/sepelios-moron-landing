@@ -144,7 +144,9 @@ function configRow(field){return cms.config.get('site|'+field);}
 function configValue(field){const row=configRow(field);return row?.[field]??'';}
 function safeHttps(input){
  try{
-  const url=new URL(String(input||'').trim(),window.location.origin);
+  const raw=String(input||'').trim();
+  if(!raw)return '';
+  const url=new URL(raw,window.location.origin);
   if(url.protocol!=='https:')return '';
   return url.href;
  }catch(_){return '';}
@@ -169,9 +171,9 @@ function pricing(){
   if(subtitle)update(el.querySelector('.price-card__value small'),subtitle);
   if(item?.precio_destacada!=null)el.classList.toggle('is-featured',normalize(item.precio_destacada)==='si');
   const message=item?.whatsapp_consulta||configValue('wa_msg_'+id+'_consulta');
-  const phone=String(configValue('whatsapp_numero')||'').replace(/\\D/g,'');
+  const phone=String(configValue('whatsapp_numero')||'').replace(/\D/g,'');
   const cta=el.querySelector('a.btn[href*="wa.me"]');
-  if(cta&&message&&/^[1-9]\\d{8,14}$/.test(phone)){
+  if(cta&&message&&/^[1-9]\d{8,14}$/.test(phone)){
    const href='https://wa.me/'+phone+'?text='+encodeURIComponent(message);
    if(cta.href!==href)cta.href=href;
   }
@@ -215,7 +217,7 @@ function sortVisible(map){return [...map.values()].filter(x=>x.mostrar!==false).
 function emailContact(){
  const row=configRow('email');
  const email=String(configValue('email')||'').trim();
- const valid=row?.mostrar!==false&&/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
+ const valid=row?.mostrar!==false&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
  const contact=[...document.querySelectorAll('.footer__top > div')].find(x=>/contacto/i.test(x.querySelector('h4')?.textContent||''));
  const list=contact?.querySelector('ul');
  let li=list?.querySelector('li[data-cms-email]');
