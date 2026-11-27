@@ -363,7 +363,7 @@ function angelLink(){
 }
 function apply(){if(running)return;running=true;try{services();faqs();pricing();sections();socials();emailContact();images();cleanVelatorioCopy();angelLink();}catch(err){console.error('[Morón CMS] Error al dibujar CMS',err);}finally{running=false;}}
 function queue(){if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;apply();});}
-window.MoronCMS={getState:()=>({loaded,serviceCount:cms.servicio.size,services:[...cms.servicio.values()].map(s=>({id:s.id,mostrar:s.mostrar,orden:s.orden}))}),parseCsv:csvRows,parseCms:readCms,refresh:()=>fetchData()};
+window.MoronCMS={getState:()=>({version:'v4-20261127',loaded,serviceCount:cms.servicio.size,services:[...cms.servicio.values()].map(s=>({id:s.id,mostrar:s.mostrar,orden:s.orden}))}),parseCsv:csvRows,parseCms:readCms,refresh:()=>fetchData()};
 async function fetchData(){
  try{
   const response=await fetch(CSV,{cache:'no-store',redirect:'follow'});
