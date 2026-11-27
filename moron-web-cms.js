@@ -250,9 +250,23 @@ function images(){
  };
  for(const [id,selector] of Object.entries(byId)){
   const item=cms.imagen.get(id);
-  const url=item?.mostrar!==false?safeHttps(item?.enlace||item?.url):'';
+  // Las versiones viejas de la hoja no traen estas filas: conservar la web aprobada.
+  if(!item)continue;
+  const visible=item.mostrar!==false;
+  const url=visible?safeHttps(item.enlace||item.url):'';
   for(const img of document.querySelectorAll(selector)){
    if(!img.dataset.cmsOriginalSrc)img.dataset.cmsOriginalSrc=img.getAttribute('src')||'';
+   if(!img.dataset.cmsImageFallbackInstalled){
+    img.dataset.cmsImageFallbackInstalled='1';
+    img.addEventListener('error',()=>{
+     const original=img.dataset.cmsOriginalSrc;
+     if(original&&img.getAttribute('src')!==original)img.setAttribute('src',original);
+    });
+   }
+   // Mostrar = NO oculta la imagen; SI la muestra con la URL indicada o la original.
+   img.hidden=!visible;
+   if(!visible){if(img.style.display!=='none')img.style.display='none';continue;}
+   if(img.style.display==='none')img.style.removeProperty('display');
    const intended=url||img.dataset.cmsOriginalSrc;
    if(intended&&img.getAttribute('src')!==intended)img.setAttribute('src',intended);
   }
@@ -311,6 +325,17 @@ function angelLink(){
  // justo debajo de la dirección y antes del mapa; nunca suelta en el footer.
  const footer=document.querySelector('footer');
  footer?.querySelector('#cms-el-angel')?.remove(); // quita el agregado anterior
+ // El HTML aprobado tiene otro script que crea un enlace al final del footer.
+ // Ocultamos SOLO esa referencia: no borrarla evita que el script vuelva a insertarla.
+ if(footer){
+  for(const link of footer.querySelectorAll('a[href*="sepelioselangel.com.ar"]')){
+   const paragraph=link.closest('p');
+   if(paragraph&&footer.contains(paragraph)){
+    paragraph.hidden=true;
+    paragraph.style.setProperty('display','none','important');
+   }else link.style.setProperty('display','none','important');
+  }
+ }
  const card=document.querySelector('#contacto .contact-card, .contact-card');
  if(!card)return;
  const title=card.querySelector('h3');
