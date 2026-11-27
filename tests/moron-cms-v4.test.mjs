@@ -49,6 +49,7 @@ async function scenario(visible,url){
  vm.runInNewContext(source,ctx,{timeout:1200});
  await sleep(25);
  assert.equal(ctx.window.MoronCMS.getState().loaded,true);
+ assert.equal(ctx.window.MoronCMS.getState().version,'v4-20261127');
  assert.equal(title.textContent,'Cremaciones las 24 horas en Morón');
  assert.equal(title.em?.textContent,'24 horas');
  assert.equal(img.hidden,!visible);
